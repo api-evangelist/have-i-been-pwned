@@ -1,0 +1,90 @@
+aid: have-i-been-pwned
+name: Have I Been Pwned
+description: >-
+  Have I Been Pwned (HIBP) is a free service operated by Troy Hunt that lets
+  individuals and organizations check whether their email addresses, phone
+  numbers, passwords, or domains have appeared in known data breaches,
+  pastes, or stealer logs. The service aggregates billions of compromised
+  records and exposes both free and paid endpoints, including the
+  k-anonymity Pwned Passwords API. The v3 REST API at haveibeenpwned.com
+  requires an hibp-api-key header for breach, paste, domain, and stealer
+  log endpoints and is offered across Core, Pro, and High RPM subscription
+  tiers.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Security
+  - Data Breaches
+  - Pwned Passwords
+  - Identity
+  - Threat Intelligence
+  - Credential Stuffing
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/have-i-been-pwned/refs/heads/main/apis.yml
+created: '2026-05-11'
+modified: '2026-05-11'
+specificationVersion: '0.19'
+apis:
+  - aid: have-i-been-pwned:api-v3
+    name: Have I Been Pwned API v3
+    description: >-
+      REST API for searching breached accounts, pastes, breach metadata,
+      domain breach data, and stealer log entries. Authentication requires
+      an hibp-api-key header (32-character key) along with a descriptive
+      user-agent header. Most endpoints require a paid subscription; rate
+      limits range from 600 to 100,000 requests per minute depending on
+      tier.
+    humanURL: https://haveibeenpwned.com/API/v3
+    baseURL: https://haveibeenpwned.com/api/v3
+    tags:
+      - Breaches
+      - Pastes
+      - Stealer Logs
+      - Domain Search
+      - Account Search
+    properties:
+      - type: Documentation
+        url: https://haveibeenpwned.com/API/v3
+      - type: Authentication
+        url: https://haveibeenpwned.com/API/Key
+      - type: Pricing
+        url: https://haveibeenpwned.com/API/Key
+  - aid: have-i-been-pwned:pwned-passwords
+    name: Pwned Passwords API
+    description: >-
+      Free, unauthenticated, k-anonymity-based API to check whether a
+      password hash appears in the 800+ million record Pwned Passwords
+      dataset. Clients submit the first five characters of a SHA-1 hash
+      and receive a list of matching suffixes with counts. No rate limit
+      and no attribution required.
+    humanURL: https://haveibeenpwned.com/API/v3#PwnedPasswords
+    baseURL: https://api.pwnedpasswords.com
+    tags:
+      - Passwords
+      - K-Anonymity
+      - SHA-1
+      - Credential Stuffing
+    properties:
+      - type: Documentation
+        url: https://haveibeenpwned.com/API/v3#PwnedPasswords
+      - type: Project
+        url: https://haveibeenpwned.com/Passwords
+
+common:
+  - type: Website
+    url: https://haveibeenpwned.com
+  - type: Documentation
+    url: https://haveibeenpwned.com/API/v3
+  - type: Pricing
+    url: https://haveibeenpwned.com/API/Key
+  - type: Sign Up
+    url: https://haveibeenpwned.com/API/Key
+  - type: FAQ
+    url: https://haveibeenpwned.com/FAQs
+  - type: Blog
+    url: https://www.troyhunt.com
+  - type: Twitter
+    url: https://twitter.com/haveibeenpwned
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
