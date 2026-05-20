@@ -71,6 +71,10 @@ apis:
         url: https://haveibeenpwned.com/Passwords
 
 common:
+  - type: GitHubOrganization
+    url: https://github.com/HaveIBeenPwned
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/haveibeenpwned
   - type: Website
     url: https://haveibeenpwned.com
   - type: Documentation
