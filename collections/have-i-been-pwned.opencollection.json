@@ -1,0 +1,497 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Have I Been Pwned API v3",
+    "version": "3.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Get all breaches for an account",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://haveibeenpwned.com/api/v3/breachedaccount/:account",
+        "headers": [
+          {
+            "name": "user-agent",
+            "value": ""
+          }
+        ],
+        "params": [
+          {
+            "name": "account",
+            "value": "",
+            "type": "path",
+            "description": "URL-encoded account to search for (email address, username, or phone number)"
+          },
+          {
+            "name": "truncateResponse",
+            "value": "",
+            "type": "query",
+            "description": "Returns the full breach model when false. By default, only the name of the breach is returned rather than the complete breach data."
+          },
+          {
+            "name": "domain",
+            "value": "",
+            "type": "query",
+            "description": "Filters the result set to only breaches against the domain specified. It is possible that one site (and consequently domain), is compromised on multiple occasions."
+          },
+          {
+            "name": "includeUnverified",
+            "value": "",
+            "type": "query",
+            "description": "Returns breaches that have been flagged as 'unverified'. By default, both verified and unverified breaches are returned when performing a search."
+          }
+        ],
+        "auth": {
+          "type": "apikey",
+          "key": "hibp-api-key",
+          "value": "{{hibp-api-key}}",
+          "placement": "header"
+        }
+      },
+      "docs": "Available on Core, Pro, and High RPM subscriptions. Returns the breaches for the supplied account (email address, username, or phone number). The account is not case-sensitive and is trimmed of leading or trailing whitespace. The account should always be URL encoded. This is an authenticated API requiring both the hibp-api-key and user-agent headers. Test API keys can be used to query test accounts on the hibp-integration-tests.com domain."
+    },
+    {
+      "info": {
+        "name": "Get all breached account hashes for a range",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://haveibeenpwned.com/api/v3/breachedaccount/range/:prefix",
+        "headers": [
+          {
+            "name": "user-agent",
+            "value": ""
+          }
+        ],
+        "params": [
+          {
+            "name": "prefix",
+            "value": "",
+            "type": "path",
+            "description": "First 6 characters of the SHA-1 hash of the email address to search for (hexadecimal, not case-sensitive)"
+          }
+        ],
+        "auth": {
+          "type": "apikey",
+          "key": "hibp-api-key",
+          "value": "{{hibp-api-key}}",
+          "placement": "header"
+        }
+      },
+      "docs": "Available on Pro and High RPM subscriptions. Search breached accounts via k-anonymity by providing the first 6 characters of the SHA-1 hash of a normalised email address. The response contains matching hash suffixes and associated breach names after public filtering. Sensitive and retired breaches are not returned. Per the terms of use, any results that do not match the target account being searched must be discarded immediately and not stored or further processed."
+    },
+    {
+      "info": {
+        "name": "Get all breached email addresses for a domain",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://haveibeenpwned.com/api/v3/breacheddomain/:domain",
+        "headers": [
+          {
+            "name": "user-agent",
+            "value": ""
+          }
+        ],
+        "params": [
+          {
+            "name": "domain",
+            "value": "",
+            "type": "path",
+            "description": "The domain to be searched for. Must be a verified domain in the domain search dashboard."
+          }
+        ],
+        "auth": {
+          "type": "apikey",
+          "key": "hibp-api-key",
+          "value": "{{hibp-api-key}}",
+          "placement": "header"
+        }
+      },
+      "docs": "Available on Core and Pro subscriptions. Returns all breached email aliases on a verified domain and the breach names they have appeared in. The domain must already have been added to the domain search dashboard and successfully verified. Sensitive breaches are returned because this API is only available after domain control has been demonstrated."
+    },
+    {
+      "info": {
+        "name": "Get all subscribed domains for API key",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://haveibeenpwned.com/api/v3/subscribeddomains",
+        "headers": [
+          {
+            "name": "user-agent",
+            "value": ""
+          }
+        ],
+        "auth": {
+          "type": "apikey",
+          "key": "hibp-api-key",
+          "value": "{{hibp-api-key}}",
+          "placement": "header"
+        }
+      },
+      "docs": "Available on Core and Pro subscriptions. Returns the domains associated with the supplied hibp-api-key after they have been added to the domain search dashboard and verified."
+    },
+    {
+      "info": {
+        "name": "Generate a DNS verification token for a domain",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://haveibeenpwned.com/api/v3/domainverification/generatednstoken",
+        "headers": [
+          {
+            "name": "user-agent",
+            "value": ""
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        },
+        "auth": {
+          "type": "apikey",
+          "key": "hibp-api-key",
+          "value": "{{hibp-api-key}}",
+          "placement": "header"
+        }
+      },
+      "docs": "Available on Pro subscriptions. Generates the domain-specific TXT record value used to verify control of a domain via DNS before it can be searched through the domain search APIs."
+    },
+    {
+      "info": {
+        "name": "Verify a DNS token for a domain",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://haveibeenpwned.com/api/v3/domainverification/verifydnstoken",
+        "headers": [
+          {
+            "name": "user-agent",
+            "value": ""
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        },
+        "auth": {
+          "type": "apikey",
+          "key": "hibp-api-key",
+          "value": "{{hibp-api-key}}",
+          "placement": "header"
+        }
+      },
+      "docs": "Available on Pro subscriptions. Checks the hibp-verify TXT record on the requested domain and, if it matches the previously generated token, marks the domain as verified for domain search."
+    },
+    {
+      "info": {
+        "name": "Send a domain verification approval email",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://haveibeenpwned.com/api/v3/domainverification/sendemail",
+        "headers": [
+          {
+            "name": "user-agent",
+            "value": ""
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        },
+        "auth": {
+          "type": "apikey",
+          "key": "hibp-api-key",
+          "value": "{{hibp-api-key}}",
+          "placement": "header"
+        }
+      },
+      "docs": "Available on Pro subscriptions. Sends a verification email to one of the configured aliases on the target domain so that domain control can be approved via a link in the email."
+    },
+    {
+      "info": {
+        "name": "Get all breaches in the system",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://haveibeenpwned.com/api/v3/breaches",
+        "headers": [
+          {
+            "name": "user-agent",
+            "value": ""
+          }
+        ],
+        "params": [
+          {
+            "name": "domain",
+            "value": "",
+            "type": "query",
+            "description": "Filters the result set to only breaches against the domain specified. It is possible that one site (and consequently domain), is compromised on multiple occasions."
+          },
+          {
+            "name": "isSpamList",
+            "value": "",
+            "type": "query",
+            "description": "Filters the result set to only breaches that either are or are not flagged as a spam list."
+          }
+        ]
+      },
+      "docs": "Returns the full breach catalogue. This endpoint is unauthenticated, but it still requires a user-agent header."
+    },
+    {
+      "info": {
+        "name": "Get a single breach by name",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://haveibeenpwned.com/api/v3/breach/:name",
+        "headers": [
+          {
+            "name": "user-agent",
+            "value": ""
+          }
+        ],
+        "params": [
+          {
+            "name": "name",
+            "value": "",
+            "type": "path",
+            "description": "Unique breach name (Pascal-cased, stable identifier)"
+          }
+        ]
+      },
+      "docs": "Returns the full breach model for a single breach identified by its stable Name value. This endpoint is unauthenticated, but it still requires a user-agent header."
+    },
+    {
+      "info": {
+        "name": "Get the most recently added breach",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://haveibeenpwned.com/api/v3/latestbreach",
+        "headers": [
+          {
+            "name": "user-agent",
+            "value": ""
+          }
+        ]
+      },
+      "docs": "Returns the most recently added breach based on AddedDate. This endpoint is unauthenticated, but it still requires a user-agent header."
+    },
+    {
+      "info": {
+        "name": "Get all data classes in the system",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://haveibeenpwned.com/api/v3/dataclasses",
+        "headers": [
+          {
+            "name": "user-agent",
+            "value": ""
+          }
+        ]
+      },
+      "docs": "Returns the alphabetically ordered list of data classes seen across breaches in the system. This endpoint is unauthenticated, but it still requires a user-agent header."
+    },
+    {
+      "info": {
+        "name": "Get all stealer log domains for an email address",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://haveibeenpwned.com/api/v3/stealerlogsbyemail/:email",
+        "headers": [
+          {
+            "name": "user-agent",
+            "value": ""
+          }
+        ],
+        "params": [
+          {
+            "name": "email",
+            "value": "",
+            "type": "path",
+            "description": "URL-encoded email address to search for stealer logs. Must be on a verified domain in the domain search dashboard."
+          }
+        ],
+        "auth": {
+          "type": "apikey",
+          "key": "hibp-api-key",
+          "value": "{{hibp-api-key}}",
+          "placement": "header"
+        }
+      },
+      "docs": "Available on Pro subscriptions. Searches stealer-log data by the full email address captured by an info stealer. The email address must be on a domain already added to the domain search dashboard and successfully verified. The current subscription must include stealer-log access."
+    },
+    {
+      "info": {
+        "name": "Get all stealer log email addresses for a website domain",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://haveibeenpwned.com/api/v3/stealerlogsbywebsitedomain/:domain",
+        "headers": [
+          {
+            "name": "user-agent",
+            "value": ""
+          }
+        ],
+        "params": [
+          {
+            "name": "domain",
+            "value": "",
+            "type": "path",
+            "description": "Website domain to search for in stealer logs. Must be a verified domain in the domain search dashboard."
+          }
+        ],
+        "auth": {
+          "type": "apikey",
+          "key": "hibp-api-key",
+          "value": "{{hibp-api-key}}",
+          "placement": "header"
+        }
+      },
+      "docs": "Available on Pro subscriptions. Searches stealer-log data by the website domain victims were authenticating to when their credentials were captured. The domain must already be added to the domain search dashboard and successfully verified. The current subscription must include stealer-log access."
+    },
+    {
+      "info": {
+        "name": "Get all stealer log email aliases for an email domain",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://haveibeenpwned.com/api/v3/stealerlogsbyemaildomain/:domain",
+        "headers": [
+          {
+            "name": "user-agent",
+            "value": ""
+          }
+        ],
+        "params": [
+          {
+            "name": "domain",
+            "value": "",
+            "type": "path",
+            "description": "Email domain to search for stealer logs. Must be a verified domain in the domain search dashboard."
+          }
+        ],
+        "auth": {
+          "type": "apikey",
+          "key": "hibp-api-key",
+          "value": "{{hibp-api-key}}",
+          "placement": "header"
+        }
+      },
+      "docs": "Available on Pro subscriptions. Searches stealer-log data by the domain portion of the email address and returns aliases mapped to the website domains where those credentials appeared. The domain must already be added to the domain search dashboard and successfully verified. The current subscription must include stealer-log access."
+    },
+    {
+      "info": {
+        "name": "Get all pastes for an account",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://haveibeenpwned.com/api/v3/pasteaccount/:account",
+        "headers": [
+          {
+            "name": "user-agent",
+            "value": ""
+          }
+        ],
+        "params": [
+          {
+            "name": "account",
+            "value": "",
+            "type": "path",
+            "description": "URL-encoded email address to search for pastes"
+          }
+        ],
+        "auth": {
+          "type": "apikey",
+          "key": "hibp-api-key",
+          "value": "{{hibp-api-key}}",
+          "placement": "header"
+        }
+      },
+      "docs": "Available on Core, Pro, and High RPM subscriptions. Searches for pastes containing the supplied email address. The address is not case-sensitive, is trimmed of leading or trailing whitespace, and should always be URL encoded. This is an authenticated API requiring both the hibp-api-key and user-agent headers."
+    },
+    {
+      "info": {
+        "name": "Get current subscription status",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://haveibeenpwned.com/api/v3/subscription/status",
+        "headers": [
+          {
+            "name": "user-agent",
+            "value": ""
+          }
+        ],
+        "auth": {
+          "type": "apikey",
+          "key": "hibp-api-key",
+          "value": "{{hibp-api-key}}",
+          "placement": "header"
+        }
+      },
+      "docs": "Available on Core, Pro, and High RPM subscriptions. Returns details of the current subscription represented by the supplied hibp-api-key, including plan capabilities such as stealer-log access, breached-account k-anonymity access, bulk domain add features, and monitored-domain limits."
+    },
+    {
+      "info": {
+        "name": "Pwned Passwords range search (k-Anonymity)",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://haveibeenpwned.com/api/v3/range/:prefix",
+        "headers": [
+          {
+            "name": "user-agent",
+            "value": ""
+          },
+          {
+            "name": "Add-Padding",
+            "value": ""
+          }
+        ],
+        "params": [
+          {
+            "name": "prefix",
+            "value": "",
+            "type": "path",
+            "description": "First 5 characters of a SHA-1 or NTLM hash (hexadecimal, not case-sensitive)"
+          },
+          {
+            "name": "mode",
+            "value": "",
+            "type": "query",
+            "description": "Returns NTLM hash suffixes when set to 'ntlm'. When the mode is not specified or is any value other than 'ntlm', the resulting hashes will be in SHA-1 form."
+          }
+        ]
+      },
+      "docs": "Free Pwned Passwords range search using k-anonymity. This endpoint does not require authentication and is not rate limited, but it still requires a user-agent header. Provide the first 5 characters of either a SHA-1 or NTLM hash to receive matching suffixes and prevalence counts."
+    }
+  ],
+  "bundled": true
+}
