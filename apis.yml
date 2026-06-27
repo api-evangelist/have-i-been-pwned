@@ -81,7 +81,7 @@ common:
     url: https://haveibeenpwned.com/API/v3
   - type: Pricing
     url: https://haveibeenpwned.com/API/Key
-  - type: SignUp
+  - type: Signup
     url: https://haveibeenpwned.com/API/Key
   - type: FAQ
     url: https://haveibeenpwned.com/FAQs
