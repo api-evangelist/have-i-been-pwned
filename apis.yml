@@ -71,6 +71,12 @@ apis:
         url: https://haveibeenpwned.com/Passwords
 
 common:
+  - type: VulnerabilityDisclosure
+    url: security/have-i-been-pwned-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/have-i-been-pwned-domain-security.yml
+  - type: Authentication
+    url: authentication/have-i-been-pwned-authentication.yml
   - type: GitHubOrganization
     url: https://github.com/HaveIBeenPwned
   - type: LinkedIn

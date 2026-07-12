@@ -1,0 +1,18 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/have-i-been-pwned-openapi.json
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: HibpApiKey
+  type: apiKey
+  in: header
+  parameter: hibp-api-key
+  description: HIBP API key passed in the hibp-api-key header. Paid APIs require a 32-character
+    hexadecimal value. On supported test-only endpoints, any 32-character hexadecimal value
+    can be used as a test key for the hibp-integration-tests.com domain.
+  sources:
+  - openapi/have-i-been-pwned-openapi.json
