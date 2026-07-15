@@ -71,6 +71,8 @@ apis:
         url: https://haveibeenpwned.com/Passwords
 
 common:
+  - type: AgenticAccess
+    url: agentic-access/have-i-been-pwned-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/have-i-been-pwned-vulnerability-disclosure.yml
   - type: DomainSecurity
