@@ -1,0 +1,141 @@
+openapi: 3.0.3
+info:
+  title: Have I Been Pwned API v3 Breach Subscription API
+  description: Version 3 of the Have I Been Pwned API. Authenticated APIs for breaches by account, pastes, domain search, domain verification, stealer logs, and subscription status require both the hibp-api-key and user-agent headers. Availability varies by subscription tier and is noted per operation. The Pwned Passwords range API is free and does not require authentication.
+  version: 3.0.0
+  license:
+    name: Creative Commons Attribution 4.0 International
+    url: https://creativecommons.org/licenses/by/4.0/
+servers:
+- url: https://haveibeenpwned.com/api/v3
+  description: HIBP API v3 server
+- url: https://api.pwnedpasswords.com
+  description: Pwned Passwords k-Anonymity API (no authentication required)
+tags:
+- name: Subscription
+paths:
+  /subscription/status:
+    servers:
+    - url: https://haveibeenpwned.com/api/v3
+    get:
+      summary: Get current subscription status
+      description: Available on Core, Pro, and High RPM subscriptions. Returns details of the current subscription represented by the supplied hibp-api-key, including plan capabilities such as stealer-log access, breached-account k-anonymity access, bulk domain add features, and monitored-domain limits.
+      parameters:
+      - $ref: '#/components/parameters/UserAgent'
+      security:
+      - HibpApiKey: []
+      responses:
+        '200':
+          description: Current subscription capabilities and limits for the supplied API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionStatus'
+        '401':
+          description: Unauthorized — the hibp-api-key header was missing, malformed, or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden — no user agent has been specified in the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not found — no active subscription was found for the supplied API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                statusCode: 404
+                message: No active subscription found.
+      x-hibp-subscription-tiers:
+      - Core
+      - Pro
+      - High RPM
+      tags:
+      - Subscription
+components:
+  parameters:
+    UserAgent:
+      name: user-agent
+      in: header
+      required: true
+      description: User agent string identifying the consuming application. Required on all documented requests, including unauthenticated endpoints; missing user agents may receive HTTP 403 responses.
+      schema:
+        type: string
+  schemas:
+    SubscriptionStatus:
+      type: object
+      properties:
+        SubscriptionName:
+          type: string
+          description: The name representing the current plan and level, for example "Core 1", "Pro 2", or "High RPM 12000".
+        Description:
+          type: string
+          description: A human-readable sentence explaining the scope of the subscription.
+        SubscribedUntil:
+          type: string
+          format: date-time
+          description: The date and time the current subscription ends in ISO 8601 format.
+        Rpm:
+          type: integer
+          description: The rate limit in requests per minute. This applies to the rate the breach search by email address API can be requested.
+        DomainSearchMaxBreachedAccounts:
+          type: integer
+          nullable: true
+          description: The size of the largest domain the subscription can search. This is expressed in the total number of breached email addresses on the domain, excluding those that appear solely in spam lists.
+        MaxBreachedDomains:
+          type: integer
+          nullable: true
+          description: The number of domains the subscription can add, regardless of their size. A null value indicates there is no max domain limit.
+        IncludesStealerLogs:
+          type: boolean
+          description: Indicates if the subscription includes access to the stealer logs APIs.
+        IncludesBulkDomainAdd:
+          type: boolean
+          description: Indicates if the subscription includes access to the APIs that add domains via DNS or email verification.
+        IncludesAutoSubdomainVerification:
+          type: boolean
+          description: Indicates if the subscription allows subdomains to be automatically added after the apex domain has already been verified.
+        IncludesCustomerDomains:
+          type: boolean
+          description: Indicates if the subscription allows the domains of customers to be added.
+        IncludesKAnon:
+          type: boolean
+          description: Indicates if the subscription includes access to the breached-account k-anonymity API.
+      required:
+      - SubscriptionName
+      - Description
+      - SubscribedUntil
+      - Rpm
+      - DomainSearchMaxBreachedAccounts
+      - MaxBreachedDomains
+      - IncludesStealerLogs
+      - IncludesBulkDomainAdd
+      - IncludesAutoSubdomainVerification
+      - IncludesCustomerDomains
+      - IncludesKAnon
+    Error:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+        message:
+          type: string
+      required:
+      - statusCode
+      - message
+      description: Standard error response returned by most authenticated HIBP APIs.
+  securitySchemes:
+    HibpApiKey:
+      type: apiKey
+      in: header
+      name: hibp-api-key
+      description: HIBP API key passed in the hibp-api-key header. Paid APIs require a 32-character hexadecimal value. On supported test-only endpoints, any 32-character hexadecimal value can be used as a test key for the hibp-integration-tests.com domain.
+externalDocs:
+  description: Full API documentation and acceptable use policy
+  url: https://haveibeenpwned.com/API/v3

@@ -1,0 +1,121 @@
+openapi: 3.0.3
+info:
+  title: Have I Been Pwned API v3 Breach Stealerlogsbyemaildomain API
+  description: Version 3 of the Have I Been Pwned API. Authenticated APIs for breaches by account, pastes, domain search, domain verification, stealer logs, and subscription status require both the hibp-api-key and user-agent headers. Availability varies by subscription tier and is noted per operation. The Pwned Passwords range API is free and does not require authentication.
+  version: 3.0.0
+  license:
+    name: Creative Commons Attribution 4.0 International
+    url: https://creativecommons.org/licenses/by/4.0/
+servers:
+- url: https://haveibeenpwned.com/api/v3
+  description: HIBP API v3 server
+- url: https://api.pwnedpasswords.com
+  description: Pwned Passwords k-Anonymity API (no authentication required)
+tags:
+- name: Stealerlogsbyemaildomain
+paths:
+  /stealerlogsbyemaildomain/{domain}:
+    servers:
+    - url: https://haveibeenpwned.com/api/v3
+    get:
+      summary: Get all stealer log email aliases for an email domain
+      description: Available on Pro subscriptions. Searches stealer-log data by the domain portion of the email address and returns aliases mapped to the website domains where those credentials appeared. The domain must already be added to the domain search dashboard and successfully verified. The current subscription must include stealer-log access.
+      parameters:
+      - $ref: '#/components/parameters/UserAgent'
+      - name: domain
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Email domain to search for stealer logs. Must be a verified domain in the domain search dashboard.
+      security:
+      - HibpApiKey: []
+      responses:
+        '200':
+          description: Map of email aliases to website domains, both sorted alphabetically
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: array
+                  items:
+                    type: string
+              example:
+                andy:
+                - netflix.com
+                jane:
+                - netflix.com
+                - spotify.com
+        '401':
+          description: Unauthorized — the hibp-api-key header was missing, malformed, or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden — no user agent has been specified in the request, the domain has not been verified for this subscription, or the current subscription product does not include access to stealer logs.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not found — there are no stealer-log results for that email domain.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too many requests — the domain-based stealer-log rate limit has been exceeded. This limit is independent of the subscription RPM.
+          headers:
+            Retry-After:
+              description: Seconds until retry (rounded up to the next whole second)
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                statusCode: 429
+                message: Rate limit is exceeded. Try again in 2 seconds.
+        '503':
+          description: Service unavailable — usually returned by Cloudflare if the underlying service is not available.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-hibp-subscription-tiers:
+      - Pro
+      tags:
+      - Stealerlogsbyemaildomain
+components:
+  parameters:
+    UserAgent:
+      name: user-agent
+      in: header
+      required: true
+      description: User agent string identifying the consuming application. Required on all documented requests, including unauthenticated endpoints; missing user agents may receive HTTP 403 responses.
+      schema:
+        type: string
+  schemas:
+    Error:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+        message:
+          type: string
+      required:
+      - statusCode
+      - message
+      description: Standard error response returned by most authenticated HIBP APIs.
+  securitySchemes:
+    HibpApiKey:
+      type: apiKey
+      in: header
+      name: hibp-api-key
+      description: HIBP API key passed in the hibp-api-key header. Paid APIs require a 32-character hexadecimal value. On supported test-only endpoints, any 32-character hexadecimal value can be used as a test key for the hibp-integration-tests.com domain.
+externalDocs:
+  description: Full API documentation and acceptable use policy
+  url: https://haveibeenpwned.com/API/v3

@@ -1,0 +1,91 @@
+openapi: 3.0.3
+info:
+  title: Have I Been Pwned API v3 Breach Range API
+  description: Version 3 of the Have I Been Pwned API. Authenticated APIs for breaches by account, pastes, domain search, domain verification, stealer logs, and subscription status require both the hibp-api-key and user-agent headers. Availability varies by subscription tier and is noted per operation. The Pwned Passwords range API is free and does not require authentication.
+  version: 3.0.0
+  license:
+    name: Creative Commons Attribution 4.0 International
+    url: https://creativecommons.org/licenses/by/4.0/
+servers:
+- url: https://haveibeenpwned.com/api/v3
+  description: HIBP API v3 server
+- url: https://api.pwnedpasswords.com
+  description: Pwned Passwords k-Anonymity API (no authentication required)
+tags:
+- name: Range
+paths:
+  /range/{prefix}:
+    servers:
+    - url: https://api.pwnedpasswords.com
+    get:
+      summary: Pwned Passwords range search (k-Anonymity)
+      description: Free Pwned Passwords range search using k-anonymity. This endpoint does not require authentication and is not rate limited, but it still requires a user-agent header. Provide the first 5 characters of either a SHA-1 or NTLM hash to receive matching suffixes and prevalence counts.
+      parameters:
+      - $ref: '#/components/parameters/UserAgent'
+      - $ref: '#/components/parameters/AddPadding'
+      - name: prefix
+        in: path
+        required: true
+        schema:
+          type: string
+          minLength: 5
+          maxLength: 5
+          pattern: ^[0-9A-Fa-f]{5}$
+        description: First 5 characters of a SHA-1 or NTLM hash (hexadecimal, not case-sensitive)
+      - name: mode
+        in: query
+        schema:
+          type: string
+          enum:
+          - ntlm
+        description: Returns NTLM hash suffixes when set to 'ntlm'. When the mode is not specified or is any value other than 'ntlm', the resulting hashes will be in SHA-1 form.
+      responses:
+        '200':
+          description: Hash suffixes and prevalence counts. Each line contains a hash suffix followed by a colon and the count of how many times the password appears in the data set. Padded entries (when Add-Padding is used) always have a count of 0 and should be discarded.
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: '0018A45C4D1DEF81644B54AB7F969B88D65:1
+
+                00D4F6E8FA6EECAD2A3AA415EEC418D38EC:2
+
+                011053FD0102E94D6AE2F8B83D76FAF94F6:1
+
+                012A7CA357541F0AC487871FEEC1891C49C:2
+
+                0136E006E24E7D152139815FB0FC6A50B15:2'
+        '403':
+          description: Forbidden — missing or invalid user agent
+          content:
+            text/plain:
+              schema:
+                type: string
+      security: []
+      tags:
+      - Range
+components:
+  parameters:
+    AddPadding:
+      name: Add-Padding
+      in: header
+      required: false
+      description: Adds random padding to Pwned Passwords responses (discard padded entries with count of 0).
+      schema:
+        type: boolean
+    UserAgent:
+      name: user-agent
+      in: header
+      required: true
+      description: User agent string identifying the consuming application. Required on all documented requests, including unauthenticated endpoints; missing user agents may receive HTTP 403 responses.
+      schema:
+        type: string
+  securitySchemes:
+    HibpApiKey:
+      type: apiKey
+      in: header
+      name: hibp-api-key
+      description: HIBP API key passed in the hibp-api-key header. Paid APIs require a 32-character hexadecimal value. On supported test-only endpoints, any 32-character hexadecimal value can be used as a test key for the hibp-integration-tests.com domain.
+externalDocs:
+  description: Full API documentation and acceptable use policy
+  url: https://haveibeenpwned.com/API/v3

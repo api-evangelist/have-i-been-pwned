@@ -1,0 +1,167 @@
+openapi: 3.0.3
+info:
+  title: Have I Been Pwned API v3 Breach API
+  description: Version 3 of the Have I Been Pwned API. Authenticated APIs for breaches by account, pastes, domain search, domain verification, stealer logs, and subscription status require both the hibp-api-key and user-agent headers. Availability varies by subscription tier and is noted per operation. The Pwned Passwords range API is free and does not require authentication.
+  version: 3.0.0
+  license:
+    name: Creative Commons Attribution 4.0 International
+    url: https://creativecommons.org/licenses/by/4.0/
+servers:
+- url: https://haveibeenpwned.com/api/v3
+  description: HIBP API v3 server
+- url: https://api.pwnedpasswords.com
+  description: Pwned Passwords k-Anonymity API (no authentication required)
+tags:
+- name: Breach
+paths:
+  /breach/{name}:
+    servers:
+    - url: https://haveibeenpwned.com/api/v3
+    get:
+      summary: Get a single breach by name
+      description: Returns the full breach model for a single breach identified by its stable Name value. This endpoint is unauthenticated, but it still requires a user-agent header.
+      parameters:
+      - $ref: '#/components/parameters/UserAgent'
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Unique breach name (Pascal-cased, stable identifier)
+      responses:
+        '200':
+          description: A single breach object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Breach'
+        '403':
+          description: Forbidden — missing user agent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not found — breach name invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      tags:
+      - Breach
+components:
+  schemas:
+    Breach:
+      type: object
+      properties:
+        Name:
+          type: string
+          description: A Pascal-cased name representing the breach which is unique across all other breaches. This value never changes and may be used to name dependent assets (such as images) but should not be shown directly to end users (see the 'Title' attribute instead).
+        Title:
+          type: string
+          description: A descriptive title for the breach suitable for displaying to end users. It's unique across all breaches but individual values may change in the future (i.e. if another breach occurs against an organisation already in the system).
+        Domain:
+          type: string
+          description: The domain of the primary website the breach occurred on. This may be used for identifying other assets external systems may have for the site.
+        BreachDate:
+          type: string
+          format: date
+          description: The date (with no time) the breach originally occurred on in ISO 8601 format. This is not always accurate — frequently breaches are discovered and reported long after the original incident. Use this attribute as a guide only.
+        AddedDate:
+          type: string
+          format: date-time
+          description: The date and time (precision to the minute) the breach was added to the system in ISO 8601 format.
+        ModifiedDate:
+          type: string
+          format: date-time
+          description: The date and time (precision to the minute) the breach was modified in ISO 8601 format. This will only differ from the AddedDate attribute if other attributes represented here are changed or data in the breach itself is changed (i.e. additional data is identified and loaded). It is always either equal to or greater then the AddedDate attribute, never less than.
+        PwnCount:
+          type: integer
+          description: The total number of accounts loaded into the system. This is usually less than the total number reported by the media due to duplication or other data integrity issues in the source data.
+        Description:
+          type: string
+          description: Contains an overview of the breach represented in HTML markup. The description may include markup such as emphasis and strong tags as well as hyperlinks.
+        DataClasses:
+          type: array
+          items:
+            type: string
+          description: This attribute describes the nature of the data compromised in the breach and contains an alphabetically ordered string array of impacted data classes.
+        IsVerified:
+          type: boolean
+          description: Indicates that the breach is considered unverified. An unverified breach may not have been hacked from the indicated website. An unverified breach is still loaded into HIBP when there's sufficient confidence that a significant portion of the data is legitimate.
+        IsFabricated:
+          type: boolean
+          description: Indicates that the breach is considered fabricated. A fabricated breach is unlikely to have been hacked from the indicated website and usually contains a large amount of manufactured data. However, it still contains legitimate email addresses and asserts that the account owners were compromised in the alleged breach.
+        IsSensitive:
+          type: boolean
+          description: Indicates if the breach is considered sensitive. The public API will not return any accounts for a breach flagged as sensitive.
+        IsRetired:
+          type: boolean
+          description: Indicates if the breach has been retired. This data has been permanently removed and will not be returned by the API.
+        IsSpamList:
+          type: boolean
+          description: Indicates if the breach is considered a spam list. This flag has no impact on any other attributes but it means that the data has not come as a result of a security compromise.
+        IsMalware:
+          type: boolean
+          description: Indicates if the breach is sourced from malware. This flag has no impact on any other attributes, it merely flags that the data was sourced from a malware campaign rather than a security compromise of an online service.
+        IsSubscriptionFree:
+          type: boolean
+          description: Indicates if the breach is subscription-free. This flag has no impact on any other attributes, it is only used when running a domain search where a sufficiently sized subscription isn't present.
+        IsStealerLog:
+          type: boolean
+          description: Indicates if the breach is sourced from stealer logs. A breach with this flag also has the domains that appear in the logs loaded against each email address. This data can be accessed via the stealer logs API.
+        LogoPath:
+          type: string
+          format: uri
+          description: A URI that specifies where a logo for the breached service can be found. Logos are always in PNG format.
+        Attribution:
+          type: string
+          nullable: true
+          description: Sometimes requested by the party that provides the data to HIBP.
+      required:
+      - Name
+      - Title
+      - Domain
+      - BreachDate
+      - AddedDate
+      - ModifiedDate
+      - PwnCount
+      - Description
+      - DataClasses
+      - IsVerified
+      - IsFabricated
+      - IsSensitive
+      - IsRetired
+      - IsSpamList
+      - IsMalware
+      - IsSubscriptionFree
+      - IsStealerLog
+      - LogoPath
+    Error:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+        message:
+          type: string
+      required:
+      - statusCode
+      - message
+      description: Standard error response returned by most authenticated HIBP APIs.
+  parameters:
+    UserAgent:
+      name: user-agent
+      in: header
+      required: true
+      description: User agent string identifying the consuming application. Required on all documented requests, including unauthenticated endpoints; missing user agents may receive HTTP 403 responses.
+      schema:
+        type: string
+  securitySchemes:
+    HibpApiKey:
+      type: apiKey
+      in: header
+      name: hibp-api-key
+      description: HIBP API key passed in the hibp-api-key header. Paid APIs require a 32-character hexadecimal value. On supported test-only endpoints, any 32-character hexadecimal value can be used as a test key for the hibp-integration-tests.com domain.
+externalDocs:
+  description: Full API documentation and acceptable use policy
+  url: https://haveibeenpwned.com/API/v3

@@ -1,0 +1,270 @@
+openapi: 3.0.3
+info:
+  title: Have I Been Pwned API v3 Breach Domainverification API
+  description: Version 3 of the Have I Been Pwned API. Authenticated APIs for breaches by account, pastes, domain search, domain verification, stealer logs, and subscription status require both the hibp-api-key and user-agent headers. Availability varies by subscription tier and is noted per operation. The Pwned Passwords range API is free and does not require authentication.
+  version: 3.0.0
+  license:
+    name: Creative Commons Attribution 4.0 International
+    url: https://creativecommons.org/licenses/by/4.0/
+servers:
+- url: https://haveibeenpwned.com/api/v3
+  description: HIBP API v3 server
+- url: https://api.pwnedpasswords.com
+  description: Pwned Passwords k-Anonymity API (no authentication required)
+tags:
+- name: Domainverification
+paths:
+  /domainverification/generatednstoken:
+    servers:
+    - url: https://haveibeenpwned.com/api/v3
+    post:
+      summary: Generate a DNS verification token for a domain
+      description: Available on Pro subscriptions. Generates the domain-specific TXT record value used to verify control of a domain via DNS before it can be searched through the domain search APIs.
+      x-hibp-subscription-tiers:
+      - Pro
+      parameters:
+      - $ref: '#/components/parameters/UserAgent'
+      security:
+      - HibpApiKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DomainVerificationRequest'
+            example:
+              DomainName: example.com
+      responses:
+        '200':
+          description: The TXT record value to publish on the domain.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainVerificationDnsTokenResponse'
+              example:
+                txtRecordValue: hibp-verify=dweb_abc123xyz
+        '400':
+          description: Bad request — the request body was invalid, the domain was invalid, or the domain cannot be verified.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageOnlyError'
+              examples:
+                invalidDomain:
+                  value:
+                    message: An invalid domain was provided with the request
+                alreadyVerified:
+                  value:
+                    message: Domain has already been verified.
+                invalidJson:
+                  value:
+                    message: Invalid JSON
+        '401':
+          description: Unauthorized — the hibp-api-key header was missing, malformed, or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden — no user agent has been specified in the request, or the current subscription does not include permission to add domains via the API.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageOnlyError'
+              examples:
+                insufficientSubscription:
+                  value:
+                    message: Your subscription does not have permission to add domains. Please contact support if you believe this is an error.
+      tags:
+      - Domainverification
+  /domainverification/verifydnstoken:
+    servers:
+    - url: https://haveibeenpwned.com/api/v3
+    post:
+      summary: Verify a DNS token for a domain
+      description: Available on Pro subscriptions. Checks the hibp-verify TXT record on the requested domain and, if it matches the previously generated token, marks the domain as verified for domain search.
+      x-hibp-subscription-tiers:
+      - Pro
+      parameters:
+      - $ref: '#/components/parameters/UserAgent'
+      security:
+      - HibpApiKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DomainVerificationRequest'
+            example:
+              DomainName: example.com
+      responses:
+        '200':
+          description: The domain was successfully verified.
+        '400':
+          description: Bad request — the request body was invalid, the domain was invalid, or the domain cannot be verified.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageOnlyError'
+              examples:
+                invalidDomain:
+                  value:
+                    message: An invalid domain was provided with the request
+                invalidJson:
+                  value:
+                    message: Invalid JSON
+        '401':
+          description: Unauthorized — the hibp-api-key header was missing, malformed, or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden — no user agent has been specified in the request, or the current subscription does not include permission to add domains via the API.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageOnlyError'
+              examples:
+                insufficientSubscription:
+                  value:
+                    message: Your subscription does not have permission to add domains. Please contact support if you believe this is an error.
+        '404':
+          description: Not found — no matching hibp-verify TXT record was found on the domain.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageOnlyError'
+              examples:
+                noTxtRecords:
+                  value:
+                    message: No hibp-verify TXT records were found on the domain.
+                wrongTxtRecord:
+                  value:
+                    message: Expected a TXT record of hibp-verify=dweb_abc123xyz but instead found hibp-verify=dweb_othercode
+      tags:
+      - Domainverification
+  /domainverification/sendemail:
+    servers:
+    - url: https://haveibeenpwned.com/api/v3
+    post:
+      summary: Send a domain verification approval email
+      description: Available on Pro subscriptions. Sends a verification email to one of the configured aliases on the target domain so that domain control can be approved via a link in the email.
+      x-hibp-subscription-tiers:
+      - Pro
+      parameters:
+      - $ref: '#/components/parameters/UserAgent'
+      security:
+      - HibpApiKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DomainVerificationEmailRequest'
+            example:
+              DomainName: example.com
+              EmailAlias: admin
+      responses:
+        '200':
+          description: The verification email was sent successfully.
+        '400':
+          description: Bad request — the request body was invalid, the domain was invalid, the alias was invalid, or the verification email could not be sent.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageOnlyError'
+              examples:
+                missingAlias:
+                  value:
+                    message: No emailAlias field was passed in the request body.
+                invalidDomain:
+                  value:
+                    message: An invalid domain was provided with the request
+                invalidJson:
+                  value:
+                    message: Invalid JSON
+        '401':
+          description: Unauthorized — the hibp-api-key header was missing, malformed, or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden — no user agent has been specified in the request, or the current subscription does not include permission to add domains via the API.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessageOnlyError'
+              examples:
+                insufficientSubscription:
+                  value:
+                    message: Your subscription does not have permission to add domains. Please contact support if you believe this is an error.
+      tags:
+      - Domainverification
+components:
+  schemas:
+    DomainVerificationRequest:
+      type: object
+      properties:
+        DomainName:
+          type: string
+          description: Domain name to generate or verify a domain-verification token for.
+      required:
+      - DomainName
+    DomainVerificationDnsTokenResponse:
+      type: object
+      properties:
+        txtRecordValue:
+          type: string
+          description: TXT record value to publish on the domain before calling verifydnstoken.
+      required:
+      - txtRecordValue
+    DomainVerificationEmailRequest:
+      type: object
+      properties:
+        DomainName:
+          type: string
+          description: Domain name to send the verification email for.
+        EmailAlias:
+          type: string
+          description: One of the configured domain-verification aliases (for example admin or postmaster).
+      required:
+      - DomainName
+      - EmailAlias
+    MessageOnlyError:
+      type: object
+      description: Simple error response used by the domain-verification APIs.
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    Error:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+        message:
+          type: string
+      required:
+      - statusCode
+      - message
+      description: Standard error response returned by most authenticated HIBP APIs.
+  parameters:
+    UserAgent:
+      name: user-agent
+      in: header
+      required: true
+      description: User agent string identifying the consuming application. Required on all documented requests, including unauthenticated endpoints; missing user agents may receive HTTP 403 responses.
+      schema:
+        type: string
+  securitySchemes:
+    HibpApiKey:
+      type: apiKey
+      in: header
+      name: hibp-api-key
+      description: HIBP API key passed in the hibp-api-key header. Paid APIs require a 32-character hexadecimal value. On supported test-only endpoints, any 32-character hexadecimal value can be used as a test key for the hibp-integration-tests.com domain.
+externalDocs:
+  description: Full API documentation and acceptable use policy
+  url: https://haveibeenpwned.com/API/v3
