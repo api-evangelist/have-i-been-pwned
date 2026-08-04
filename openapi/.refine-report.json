@@ -1,0 +1,40 @@
+{
+  "provider": "have-i-been-pwned",
+  "sources": [
+    "have-i-been-pwned-breach-api-openapi.yml",
+    "have-i-been-pwned-breachedaccount-api-openapi.yml",
+    "have-i-been-pwned-breacheddomain-api-openapi.yml",
+    "have-i-been-pwned-breaches-api-openapi.yml",
+    "have-i-been-pwned-dataclasses-api-openapi.yml",
+    "have-i-been-pwned-domainverification-api-openapi.yml",
+    "have-i-been-pwned-latestbreach-api-openapi.yml",
+    "have-i-been-pwned-pasteaccount-api-openapi.yml",
+    "have-i-been-pwned-range-api-openapi.yml",
+    "have-i-been-pwned-stealerlogsbyemail-api-openapi.yml",
+    "have-i-been-pwned-stealerlogsbyemaildomain-api-openapi.yml",
+    "have-i-been-pwned-stealerlogsbywebsitedomain-api-openapi.yml",
+    "have-i-been-pwned-subscribeddomains-api-openapi.yml",
+    "have-i-been-pwned-subscription-api-openapi.yml"
+  ],
+  "outputs": [
+    "have-i-been-pwned-breach-api-openapi.yml",
+    "have-i-been-pwned-breachedaccount-api-openapi.yml",
+    "have-i-been-pwned-breacheddomain-api-openapi.yml",
+    "have-i-been-pwned-breaches-api-openapi.yml",
+    "have-i-been-pwned-dataclasses-api-openapi.yml",
+    "have-i-been-pwned-domainverification-api-openapi.yml",
+    "have-i-been-pwned-latestbreach-api-openapi.yml",
+    "have-i-been-pwned-pasteaccount-api-openapi.yml",
+    "have-i-been-pwned-range-api-openapi.yml",
+    "have-i-been-pwned-stealerlogsbyemail-api-openapi.yml",
+    "have-i-been-pwned-stealerlogsbyemaildomain-api-openapi.yml",
+    "have-i-been-pwned-stealerlogsbywebsitedomain-api-openapi.yml",
+    "have-i-been-pwned-subscribeddomains-api-openapi.yml",
+    "have-i-been-pwned-subscription-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
