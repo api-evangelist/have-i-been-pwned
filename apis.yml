@@ -1,15 +1,11 @@
 aid: have-i-been-pwned
 name: Have I Been Pwned
-description: >-
-  Have I Been Pwned (HIBP) is a free service operated by Troy Hunt that lets
-  individuals and organizations check whether their email addresses, phone
-  numbers, passwords, or domains have appeared in known data breaches,
-  pastes, or stealer logs. The service aggregates billions of compromised
-  records and exposes both free and paid endpoints, including the
-  k-anonymity Pwned Passwords API. The v3 REST API at haveibeenpwned.com
-  requires an hibp-api-key header for breach, paste, domain, and stealer
-  log endpoints and is offered across Core, Pro, and High RPM subscription
-  tiers.
+description: Have I Been Pwned (HIBP) is a free service operated by Troy Hunt that lets individuals and
+  organizations check whether their email addresses, phone numbers, passwords, or domains have appeared
+  in known data breaches, pastes, or stealer logs. The service aggregates billions of compromised records
+  and exposes both free and paid endpoints, including the k-anonymity Pwned Passwords API. The v3 REST
+  API at haveibeenpwned.com requires an hibp-api-key header for breach, paste, domain, and stealer log
+  endpoints and is offered across Core, Pro, and High RPM subscription tiers.
 type: Index
 accessModel:
   pricing: unknown
@@ -25,25 +21,23 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/have-i-been-pwned.png
 tags:
-  - Security
-  - Data Breaches
-  - Pwned Passwords
-  - Identity
-  - Threat Intelligence
-  - Credential Stuffing
-url: >-
-  https://raw.githubusercontent.com/api-evangelist/have-i-been-pwned/refs/heads/main/apis.yml
+- Security
+- Data Breaches
+- Pwned Passwords
+- Identity
+- Threat Intelligence
+- Credential Stuffing
+url: https://raw.githubusercontent.com/api-evangelist/have-i-been-pwned/refs/heads/main/apis.yml
 created: '2026-05-11'
-modified: '2026-05-11'
+modified: '2026-08-08'
 specificationVersion: '0.19'
 apis:
 - aid: have-i-been-pwned:api-v3
   name: Have I Been Pwned API v3
-  description: >-
-    REST API for searching breached accounts, pastes, breach metadata, domain breach data, and stealer
-    log entries. Authentication requires an hibp-api-key header (32-character key) along with a descriptive
-    user-agent header. Most endpoints require a paid subscription; rate limits range from 600 to 100,000
-    requests per minute depending on tier.
+  description: REST API for searching breached accounts, pastes, breach metadata, domain breach data,
+    and stealer log entries. Authentication requires an hibp-api-key header (32-character key) along with
+    a descriptive user-agent header. Most endpoints require a paid subscription; rate limits range from
+    600 to 100,000 requests per minute depending on tier.
   humanURL: https://haveibeenpwned.com/API/v3
   baseURL: https://haveibeenpwned.com/api/v3
   tags:
@@ -61,10 +55,9 @@ apis:
     url: https://haveibeenpwned.com/API/Key
 - aid: have-i-been-pwned:pwned-passwords
   name: Pwned Passwords API
-  description: >-
-    Free, unauthenticated, k-anonymity-based API to check whether a password hash appears in the 800+
-    million record Pwned Passwords dataset. Clients submit the first five characters of a SHA-1 hash and
-    receive a list of matching suffixes with counts. No rate limit and no attribution required.
+  description: Free, unauthenticated, k-anonymity-based API to check whether a password hash appears in
+    the 800+ million record Pwned Passwords dataset. Clients submit the first five characters of a SHA-1
+    hash and receive a list of matching suffixes with counts. No rate limit and no attribution required.
   humanURL: https://haveibeenpwned.com/API/v3#PwnedPasswords
   baseURL: https://api.pwnedpasswords.com
   tags:
@@ -129,8 +122,7 @@ apis:
     url: openapi/have-i-been-pwned-dataclasses-api-openapi.yml
 - aid: have-i-been-pwned:have-i-been-pwned-domainverification-api
   name: Have I Been Pwned Domainverification API
-  description: >-
-    The Domainverification API from Have I Been Pwned — 3 operation(s) for domainverification.
+  description: The Domainverification API from Have I Been Pwned — 3 operation(s) for domainverification.
   humanURL: https://haveibeenpwned.com/API/v3
   baseURL: https://haveibeenpwned.com/api/v3
   tags:
@@ -170,8 +162,7 @@ apis:
     url: openapi/have-i-been-pwned-range-api-openapi.yml
 - aid: have-i-been-pwned:have-i-been-pwned-stealerlogsbyemail-api
   name: Have I Been Pwned Stealerlogsbyemail API
-  description: >-
-    The Stealerlogsbyemail API from Have I Been Pwned — 1 operation(s) for stealerlogsbyemail.
+  description: The Stealerlogsbyemail API from Have I Been Pwned — 1 operation(s) for stealerlogsbyemail.
   humanURL: https://haveibeenpwned.com/API/v3
   baseURL: https://haveibeenpwned.com/api/v3
   tags:
@@ -181,8 +172,7 @@ apis:
     url: openapi/have-i-been-pwned-stealerlogsbyemail-api-openapi.yml
 - aid: have-i-been-pwned:have-i-been-pwned-stealerlogsbyemaildomain-api
   name: Have I Been Pwned Stealerlogsbyemaildomain API
-  description: >-
-    The Stealerlogsbyemaildomain API from Have I Been Pwned — 1 operation(s) for stealerlogsbyemaildomain.
+  description: The Stealerlogsbyemaildomain API from Have I Been Pwned — 1 operation(s) for stealerlogsbyemaildomain.
   humanURL: https://haveibeenpwned.com/API/v3
   baseURL: https://haveibeenpwned.com/api/v3
   tags:
@@ -192,8 +182,7 @@ apis:
     url: openapi/have-i-been-pwned-stealerlogsbyemaildomain-api-openapi.yml
 - aid: have-i-been-pwned:have-i-been-pwned-stealerlogsbywebsitedomain-api
   name: Have I Been Pwned Stealerlogsbywebsitedomain API
-  description: >-
-    The Stealerlogsbywebsitedomain API from Have I Been Pwned — 1 operation(s) for stealerlogsbywebsitedomain.
+  description: The Stealerlogsbywebsitedomain API from Have I Been Pwned — 1 operation(s) for stealerlogsbywebsitedomain.
   humanURL: https://haveibeenpwned.com/API/v3
   baseURL: https://haveibeenpwned.com/api/v3
   tags:
@@ -222,32 +211,123 @@ apis:
   - type: OpenAPI
     url: openapi/have-i-been-pwned-subscription-api-openapi.yml
 common:
-  - type: AgenticAccess
-    url: agentic-access/have-i-been-pwned-agentic-access.yml
-  - type: VulnerabilityDisclosure
-    url: security/have-i-been-pwned-vulnerability-disclosure.yml
-  - type: DomainSecurity
-    url: security/have-i-been-pwned-domain-security.yml
-  - type: Authentication
-    url: authentication/have-i-been-pwned-authentication.yml
-  - type: GitHubOrganization
-    url: https://github.com/HaveIBeenPwned
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/haveibeenpwned
-  - type: Website
-    url: https://haveibeenpwned.com
-  - type: Documentation
-    url: https://haveibeenpwned.com/API/v3
-  - type: Pricing
-    url: https://haveibeenpwned.com/API/Key
-  - type: Signup
-    url: https://haveibeenpwned.com/API/Key
-  - type: FAQ
-    url: https://haveibeenpwned.com/FAQs
-  - type: Blog
-    url: https://www.troyhunt.com
-  - type: Twitter
-    url: https://twitter.com/haveibeenpwned
+- type: AgenticAccess
+  url: agentic-access/have-i-been-pwned-agentic-access.yml
+- type: VulnerabilityDisclosure
+  url: security/have-i-been-pwned-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/have-i-been-pwned-domain-security.yml
+- type: Authentication
+  url: authentication/have-i-been-pwned-authentication.yml
+- type: GitHubOrganization
+  url: https://github.com/HaveIBeenPwned
+- type: LinkedIn
+  url: https://www.linkedin.com/company/haveibeenpwned
+- type: Website
+  url: https://haveibeenpwned.com
+- type: Documentation
+  url: https://haveibeenpwned.com/API/v3
+- type: Pricing
+  url: https://haveibeenpwned.com/API/Key
+- type: Signup
+  url: https://haveibeenpwned.com/API/Key
+- type: FAQ
+  url: https://haveibeenpwned.com/FAQs
+- type: Blog
+  url: https://www.troyhunt.com
+- type: Twitter
+  url: https://twitter.com/haveibeenpwned
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/haveibeenpwned/overview
+- type: Portal
+  url: https://haveibeenpwned.com
+- type: Plans
+  url: plans/have-i-been-pwned-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/have-i-been-pwned-rate-limits.yml
+- type: TermsOfService
+  url: https://haveibeenpwned.com/API/v3#License
+- type: PrivacyPolicy
+  url: https://haveibeenpwned.com/Privacy
+- type: StatusPage
+  url: https://status.haveibeenpwned.com
+- type: Support
+  url: https://haveibeenpwned.com/Contact
+- type: PublicAPIsListing
+  url: https://github.com/public-apis/public-apis
+- type: SpectralRules
+  url: rules/hibp-rules.yml
+- type: JSONLD
+  url: json-ld/have-i-been-pwned-context.jsonld
+- type: Vocabulary
+  url: vocabulary/have-i-been-pwned-vocabulary.yml
+- type: Tools
+  url: https://github.com/HaveIBeenPwned/EmailAddressExtractor
+  title: Email Address Extractor (CLI)
+- type: Branding
+  url: https://github.com/HaveIBeenPwned/Branding
+- type: Features
+  data:
+  - name: Email Breach Search
+    description: Lookup all breaches containing an email address.
+  - name: K-Anonymity Email Search
+    description: Privacy-preserving breach lookup by SHA-1 prefix.
+  - name: Paste Search
+    description: Discover paste-site dumps referencing an email.
+  - name: Stealer Log Lookup
+    description: Surface infostealer captures by email, website domain, or email domain.
+  - name: Domain Monitoring
+    description: Subscribe to monitor owned domains via DNS or email verification.
+  - name: Subscribed Domains Inventory
+    description: Inspect monitored domains and pending renewals.
+  - name: Pwned Passwords (Free)
+    description: K-anonymity password compromise lookups with optional response padding.
+  - name: Subscription Tier Introspection
+    description: Inspect the calling key's tier, RPM, and feature flags.
+  url: ''
+- type: UseCases
+  data:
+  - name: Account Takeover Prevention
+    description: Block sign-ups using credentials known to be in public breaches.
+  - name: Incident Response Triage
+    description: Quickly enumerate breaches and pastes touching an affected user.
+  - name: Domain Risk Monitoring
+    description: Continuously detect when a domain's users appear in new breaches.
+  - name: Password Strength Enforcement
+    description: Reject candidate passwords already present in the Pwned Passwords corpus.
+  - name: Stealer Log Notification
+    description: Detect infostealer-captured credentials before adversaries weaponize them.
+  url: ''
+- type: Integrations
+  data:
+  - name: 1Password Watchtower
+    description: 1Password leverages Pwned Passwords to flag compromised credentials.
+  - name: Mozilla Firefox Monitor
+    description: Firefox's breach-notification feature is powered by HIBP.
+  - name: Okta / Auth0
+    description: Identity providers use Pwned Passwords to enforce password policies.
+  - name: Cloudflare
+    description: Cloudflare hosts and accelerates the Pwned Passwords k-anonymity API.
+  - name: Microsoft Entra (Azure AD)
+    description: Banned-password lists can incorporate Pwned Passwords data.
+  url: ''
+- type: Solutions
+  data:
+  - name: Pwned 1
+    description: Entry tier ($3.95/mo) for hobbyists and small projects.
+  - name: Pwned 2
+    description: Mid-volume tier with stealer-log access.
+  - name: Pwned 3
+    description: High-volume tier for security vendors and MSSPs.
+  - name: Pwned 4
+    description: Enterprise tier with auto subdomain verification.
+  - name: Pwned 5
+    description: Top tier ($995/mo) for large identity-protection platforms.
+  - name: Pwned Passwords (Free)
+    description: Always-free k-anonymity password lookup at api.pwnedpasswords.com.
+  url: ''
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
+x-merged-from:
+- haveibeenpwned

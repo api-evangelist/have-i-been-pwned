@@ -1,0 +1,1071 @@
+// Custom Styles
+// This file is for project-specific styles
+
+// Import variables
+@import "variables";
+
+/* 
+ * Custom CSS File
+ * This file is intended for specific customizations and overrides. 
+ */
+
+/* Navbar Dropdown Styling
+-------------------------------------------------- */
+.dropdown-menu {
+  border-radius: 8px;
+  padding: 0.5rem 0;
+  margin-top: 0.5rem;
+  border: 1px solid rgba($primary, 0.2);
+  background: linear-gradient(145deg, rgba(29, 72, 97, 0.95) 0%, rgba(21, 43, 57, 0.95) 100%);
+  backdrop-filter: blur(10px);
+  box-shadow:
+    0 10px 25px rgba($black, 0.2),
+    0 2px 10px rgba($black, 0.1),
+    0 0 1px rgba($white, 0.1);
+
+  // Remove excessive padding
+  .dropdown-item {
+    padding: 0.6rem 1.2rem;
+    color: $gray-200;
+    transition: all 0.2s ease;
+
+    &:hover,
+    &:focus {
+      background-color: rgba($primary, 0.2);
+      color: $white;
+    }
+
+    &.active {
+      background-color: rgba($primary, 0.3);
+      color: $white;
+      position: relative;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background-color: $primary;
+      }
+    }
+  }
+
+  // Add subtle divider between items
+  .dropdown-item + .dropdown-item {
+    border-top: 1px solid rgba($white, 0.05);
+  }
+
+  // Add subtle animation
+  animation: dropdownFadeIn 0.2s ease-out;
+}
+
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Enhance dropdown toggle appearance
+.nav-link.dropdown-toggle {
+  position: relative;
+
+  &::after {
+    margin-left: 0.4em;
+    vertical-align: middle;
+    transition: transform 0.2s ease;
+  }
+
+  &[aria-expanded="true"]::after {
+    transform: rotate(180deg);
+  }
+}
+
+// Background glow effect
+body {
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  &::before {
+    content: "";
+    position: fixed;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at center, rgba($primary, 0.4) 0%, rgba($black, 0) 70%);
+    pointer-events: none;
+    filter: blur(100px);
+    z-index: -1;
+  }
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+a:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px $focus-ring-color;
+}
+
+.page-title {
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+/* Domain Search Page Styles
+-------------------------------------------------- */
+/* Verification Methods */
+.verification-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.verification-method-option {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: var(--grey-700);
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: var(--primary);
+  }
+
+  &.active {
+    border-color: var(--primary);
+    background-color: var(--grey-900);
+
+    .method-icon {
+      background-color: var(--primary);
+      color: var(--white);
+    }
+
+    .method-indicator {
+      color: var(--primary);
+    }
+  }
+}
+
+.method-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background-color: var(--grey-800);
+  margin-right: 16px;
+  font-size: 18px;
+}
+
+.method-content {
+  flex: 1;
+}
+
+.method-indicator {
+  color: transparent;
+  margin-left: 12px;
+  font-size: 18px;
+}
+
+/* Verification Instructions Container */
+#verificationInstructions {
+  position: relative;
+  min-height: 250px;
+}
+
+/* Logo Mark Spinner Animation */
+.logo-mark-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-piece {
+  opacity: 0.3;
+  transition: opacity 0.2s ease;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  animation-name: pulseFade;
+  animation-timing-function: ease-in-out;
+  transform-origin: center;
+
+  &-1 {
+    animation-delay: 0s;
+  }
+
+  &-2 {
+    animation-delay: 0.3s;
+  }
+
+  &-3 {
+    animation-delay: 0.6s;
+  }
+
+  &-4 {
+    animation-delay: 0.9s;
+  }
+
+  &-5 {
+    animation-delay: 1.2s;
+  }
+}
+
+@keyframes pulseFade {
+  0% {
+    opacity: 0.3;
+    fill: #f6f8fa;
+  }
+  50% {
+    opacity: 1;
+    fill: var(--primary);
+  }
+  100% {
+    opacity: 0.3;
+    fill: #f6f8fa;
+  }
+}
+
+/* Subscription card styles */
+.subscription-card {
+  transition: transform 0.2s ease;
+  padding: 0;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  .card-body {
+    padding: 1.5rem;
+  }
+
+  &.border-primary {
+    box-shadow: 0 0 15px rgba(29, 114, 167, 0.2);
+  }
+}
+
+.plan-header {
+  position: relative;
+}
+
+.plan-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  font-size: 0.7rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  background-color: var(--grey-600);
+  color: var(--white);
+  font-weight: 500;
+}
+
+.plan-divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--grey-600), transparent);
+  margin: 0.5rem 0;
+}
+
+.plan-features {
+  li {
+    display: flex;
+    align-items: flex-start;
+  }
+}
+
+/* Add more custom styles below */
+
+// Statistics icon style
+.stat-icon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, $primary 0%, darken($primary, 15%) 100%);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $white;
+  box-shadow: 0 0.25rem 0.5rem rgba($black, 0.15);
+
+  i {
+    font-size: 1.75rem;
+  }
+}
+
+// Custom card styles for statistics
+.card {
+  &.border-0.shadow-sm {
+    background: linear-gradient(145deg, rgba($white, 0.05) 0%, rgba($primary, 0.05) 100%);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 0.25rem 1rem rgba($black, 0.1);
+    border: 1px solid rgba($primary, 0.1);
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0.5rem 1.5rem rgba($primary, 0.15);
+    }
+  }
+}
+
+// Custom table styles
+.table-custom {
+  border-collapse: separate;
+  border-spacing: 0 0.5rem;
+
+  thead {
+    th {
+      border: none;
+      background: transparent;
+      color: $gray-500;
+      font-weight: 500;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.5px;
+      padding: 0.75rem 1rem;
+    }
+  }
+
+  tbody {
+    tr {
+      background: linear-gradient(145deg, rgba($white, 0.05) 0%, rgba($primary, 0.05) 100%);
+      box-shadow: 0 0.125rem 0.25rem rgba($black, 0.05);
+      transition: all 0.2s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0.25rem 0.5rem rgba($primary, 0.1);
+      }
+
+      td {
+        border: none;
+        padding: 1rem;
+        vertical-align: middle;
+
+        &:first-child {
+          border-top-left-radius: 0.5rem;
+          border-bottom-left-radius: 0.5rem;
+        }
+
+        &:last-child {
+          border-top-right-radius: 0.5rem;
+          border-bottom-right-radius: 0.5rem;
+        }
+      }
+    }
+  }
+}
+
+.table-icon {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, $primary 0%, darken($primary, 15%) 100%);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $white;
+
+  i {
+    font-size: 1rem;
+  }
+}
+
+// Section Headings
+.section-heading {
+  position: relative;
+  font-size: 2rem;
+  font-weight: 700;
+  color: $white;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  display: inline-block;
+  text-shadow: 0 0 10px rgba($primary, 0.3);
+
+  i {
+    color: $primary;
+    font-size: 1.75rem;
+    vertical-align: middle;
+    margin-right: 0.5rem;
+    filter: drop-shadow(0 0 5px rgba($primary, 0.5));
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(to right, $primary, rgba($primary, 0.1));
+    border-radius: 3px;
+  }
+}
+
+// Section Containers
+.section-container {
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+// Breach Page
+.breach-header {
+  position: relative;
+}
+
+.breach-logo {
+  background: transparent;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bs-white);
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(var(--bs-primary-rgb), 0.15);
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(var(--bs-primary-rgb), 0.2) 0%, rgba(var(--bs-primary-rgb), 0.05) 100%);
+    z-index: -1;
+    filter: blur(4px);
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    transition: all 0.3s ease;
+    padding: 4px;
+    mix-blend-mode: normal;
+    opacity: 1;
+  }
+}
+
+.breach-timeline {
+  position: relative;
+  padding-left: 30px;
+
+  &:before {
+    content: "";
+    position: absolute;
+    left: 10px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(
+      to bottom,
+      rgba(var(--bs-primary-rgb), 0.1) 0%,
+      rgba(var(--bs-primary-rgb), 0.8) 15%,
+      rgba(var(--bs-primary-rgb), 0.8) 85%,
+      rgba(var(--bs-primary-rgb), 0.1) 100%
+    );
+  }
+}
+
+.breach-timeline-item {
+  position: relative;
+  padding-bottom: 30px;
+
+  &:hover {
+    .breach-timeline-marker {
+      transform: scale(1.2);
+      box-shadow: 0 0 0 5px rgba(var(--bs-primary-rgb), 0.2);
+    }
+  }
+}
+
+.breach-timeline-marker {
+  position: absolute;
+  left: -30px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--bs-primary);
+  border: 3px solid rgba(var(--bs-dark-rgb), 0.8);
+  box-shadow: 0 0 0 3px rgba(var(--bs-primary-rgb), 0.3);
+  transition: all 0.3s ease;
+}
+
+.breach-timeline-content {
+  padding-left: 15px;
+  transition: all 0.3s ease;
+}
+
+.data-type-card {
+  border-radius: var(--bs-border-radius);
+  background-color: rgba(var(--bs-dark-rgb), 0.2);
+  border: 1px solid rgba(var(--bs-primary-rgb), 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    box-shadow: 0 0.25rem 0.75rem rgba(var(--bs-primary-rgb), 0.15);
+    border-color: rgba(var(--bs-primary-rgb), 0.3);
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(var(--bs-primary-rgb), 0.05) 0%, rgba(var(--bs-primary-rgb), 0.01) 100%);
+    z-index: 0;
+  }
+}
+
+.breach-stat-icon {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 0.125rem 0.375rem rgba(0, 0, 0, 0.2);
+}
+
+.breach-stat-item {
+  transition: all 0.3s ease;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+
+  &:hover {
+    background: rgba(var(--bs-primary-rgb), 0.05);
+
+    .breach-stat-icon {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.list-group-item {
+  border-color: rgba(var(--bs-primary-rgb), 0.1);
+  transition: all 0.3s ease;
+  border-radius: 0.25rem;
+  margin-bottom: 0.5rem;
+
+  &:hover {
+    background: rgba(var(--bs-primary-rgb), 0.05);
+  }
+
+  i {
+    transition: all 0.3s ease;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+/* Terms of Use Page Styles
+-------------------------------------------------- */
+/* Styling for terms list */
+.terms-list {
+  counter-reset: section;
+  list-style-type: none;
+  padding-left: 0;
+
+  > li {
+    counter-increment: section;
+    margin-bottom: 2rem;
+
+    &::before {
+      content: counter(section) ".";
+      font-weight: 500;
+      margin-right: 0.5rem;
+    }
+  }
+}
+
+/* First level nested list - numeric */
+.terms-list > li > ol {
+  counter-reset: subsection;
+  list-style-type: none;
+  padding-left: 1.5rem;
+  margin-top: 1rem;
+
+  > li {
+    counter-increment: subsection;
+    margin-bottom: 1rem;
+
+    &::before {
+      content: counter(section) "." counter(subsection);
+      font-weight: 500;
+      margin-right: 0.5rem;
+    }
+  }
+}
+
+/* Override for lowerAlpha directly under terms-list */
+.terms-list > li > ol.lowerAlpha {
+  counter-reset: item;
+  list-style-type: none;
+  padding-left: 1.5rem;
+
+  > li {
+    counter-increment: item;
+    position: relative;
+    padding-left: 1.75rem;
+    margin-bottom: 1rem;
+
+    &::before {
+      content: "(" counter(item, lower-alpha) ") ";
+      position: absolute;
+      left: 0;
+      font-weight: 500;
+      padding-right: 0.6em;
+    }
+  }
+}
+
+/* Second level nested list - lowercase alphabetic */
+.lowerAlpha {
+  list-style-type: none;
+  padding-left: 1.5rem;
+  margin-top: 0.75rem;
+  counter-reset: item;
+
+  > li {
+    margin-bottom: 0.75rem;
+    counter-increment: item;
+    position: relative;
+    padding-left: 1.75rem;
+
+    &:before {
+      content: "(" counter(item, lower-alpha) ") ";
+      position: absolute;
+      left: 0;
+      font-weight: 500;
+      padding-right: 0.6em;
+    }
+  }
+}
+
+/* Roman numeral list */
+.roman {
+  list-style-type: none;
+  padding-left: 1.5rem;
+  margin-top: 0.75rem;
+  counter-reset: item;
+
+  > li {
+    margin-bottom: 0.75rem;
+    counter-increment: item;
+    position: relative;
+    padding-left: 1.75rem;
+
+    &:before {
+      content: "(" counter(item, lower-roman) ") ";
+      position: absolute;
+      left: 0;
+      font-weight: 500;
+    }
+  }
+}
+
+/* Uppercase alphabetic list */
+.upperAlpha {
+  list-style-type: none;
+  padding-left: 1.5rem;
+  margin-top: 0.75rem;
+  counter-reset: item;
+
+  > li {
+    margin-bottom: 0.75rem;
+    counter-increment: item;
+    position: relative;
+    padding-left: 1.75rem;
+
+    &:before {
+      content: "(" counter(item, upper-alpha) ") ";
+      position: absolute;
+      left: 0;
+      font-weight: 500;
+      padding-right: 0.6em;
+    }
+  }
+}
+
+/* General styling for all list items */
+.section-container li {
+  line-height: 1.6;
+}
+
+/* Add spacing between paragraphs in list items */
+.section-container li p {
+  margin-bottom: 0.75rem;
+}
+
+/* Ensure proper styling for nested lists under lowerAlpha */
+.terms-list > li > ol.lowerAlpha > li > ol {
+  padding-left: 0;
+  margin-top: 0.75rem;
+}
+
+/* Ensure proper styling for lowerAlpha lists under numeric lists */
+.terms-list > li > ol > li > ol.lowerAlpha {
+  counter-reset: item;
+  list-style-type: none;
+  padding-left: 1.5rem;
+
+  > li {
+    counter-increment: item;
+    position: relative;
+    padding-left: 1.75rem;
+    margin-bottom: 0.75rem;
+
+    &::before {
+      content: "(" counter(item, lower-alpha) ") ";
+      position: absolute;
+      left: 0;
+      font-weight: 500;
+      padding-right: 0.6em;
+    }
+  }
+}
+
+/* No bullet list for definitions */
+.noBullet {
+  list-style-type: none;
+  padding-left: 0;
+
+  > li {
+    margin-bottom: 1rem;
+  }
+}
+
+/* Custom Input Group Styling */
+.input-group-custom {
+  display: flex;
+  width: 100%;
+
+  .form-control {
+    flex: 1;
+    border-top-left-radius: var(--border-radius);
+    border-bottom-left-radius: var(--border-radius);
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: none;
+    padding-right: 20px;
+  }
+
+  .btn-container {
+    background-color: var(--white);
+    display: flex;
+    align-items: center;
+    border-top-right-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+    border: 1px solid var(--bs-border-color);
+    border-left: none;
+    position: relative;
+    left: -1px;
+  }
+
+  .btn {
+    height: 42px;
+    margin: 6px;
+  }
+}
+
+/* Pwned Websites Page Styles
+-------------------------------------------------- */
+#pwned-websites {
+  /* RSS Button custom color */
+  .btn-rss {
+    background-color: #f26522;
+    border-color: #f26522;
+    color: white;
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    min-height: 42px;
+    flex-shrink: 0;
+    padding: 0;
+    aspect-ratio: 1/1;
+
+    &:hover {
+      background-color: #e54b00;
+      border-color: #e54b00;
+      color: white;
+    }
+  }
+
+  /* API button sizing - using primary button color */
+  .btn.btn-primary.rounded-circle {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    min-height: 42px;
+    flex-shrink: 0;
+    padding: 0;
+    aspect-ratio: 1/1;
+  }
+
+  /* Feature item hover effects */
+  .feature-item-hover {
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba($primary, 0.2);
+      border-color: rgba($primary, 0.3);
+      background-color: rgba($primary, 0.05);
+    }
+  }
+
+  /* Dropdown rotation animation */
+  .chevron-icon {
+    transition: transform 0.2s ease;
+  }
+
+  [aria-expanded="true"] {
+    .chevron-icon {
+      transform: rotate(180deg);
+    }
+
+    &.feature-item-hover {
+      background-color: rgba($primary, 0.08);
+      border-color: rgba($primary, 0.3);
+    }
+  }
+}
+
+.logo-1password {
+  height: 30px;
+  width: auto;
+  display: inline-block;
+}
+
+// When logo is used in an action card
+.action-card .logo-1password {
+  height: 24px;
+  margin-top: 12px;
+}
+
+.sponsor-label {
+  margin-left: 54px;
+}
+
+#passwordForm .btn-fixed-size {
+  min-width: 120px;
+  min-height: 38px;
+}
+
+// Fixed width elements
+.table-col-narrow {
+  width: 80px;
+}
+
+// Image sizing utilities
+.img-square-120 {
+  width: 120px;
+  height: 120px;
+}
+
+.img-square-48 {
+  width: 48px;
+  height: 48px;
+}
+
+.img-height-40 {
+  height: 40px;
+  width: auto;
+}
+
+.img-height-30 {
+  height: 30px;
+  width: auto;
+}
+
+// Max width constraints
+.min-w-240 {
+  margin-top: 0;
+  min-width: 240px;
+}
+
+// Progress bar sizing
+.progress-thin {
+  height: 6px;
+}
+
+// Container sizing
+.min-height-300 {
+  min-height: 300px;
+}
+
+// Search icon positioning
+.search-icon {
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+// Breach data indicator
+.data-indicator {
+  width: 12px;
+  height: 12px;
+  background-color: #dc3545;
+  box-shadow: 0 0 8px rgba(220, 53, 69, 0.6);
+}
+
+// Breach logo container sizing
+.breach-logo-container {
+  width: 120px;
+  height: 120px;
+}
+
+// Action icon sizing
+.action-icon {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  min-height: 48px;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Info indicator
+.info-indicator {
+  width: 12px;
+  height: 12px;
+  background-color: #0dcaf0;
+  box-shadow: 0 0 8px rgba(13, 202, 240, 0.6);
+}
+
+/* Search Results Styling
+-------------------------------------------------- */
+.search-result {
+  opacity: 1;
+  transition: opacity 0.4s ease-in-out;
+  border-width: 1px;
+  border-style: solid;
+
+  &.fade-out {
+    opacity: 0;
+  }
+
+  .result-content {
+    text-align: center;
+  }
+
+  .result-message {
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .result-icon {
+    margin-bottom: 1rem;
+  }
+
+  .result-count {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .result-heading {
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+}
+
+// Good Result (Success)
+.search-result-good {
+  border-color: $success;
+  background-color: rgba($success, 0.1);
+
+  .result-count,
+  .result-heading {
+    color: $success;
+  }
+}
+
+// Bad Result (Danger)
+.search-result-bad {
+  border-color: $danger;
+  background-color: rgba($danger, 0.1);
+
+  .result-count,
+  .result-heading {
+    color: $danger;
+  }
+}
+
+ol {
+  list-style-type: none;
+  counter-reset: item;
+  margin: 0;
+  padding: 0;
+}
+
+ol > li {
+  display: table;
+  counter-increment: item;
+  margin-bottom: 0.6em;
+}
+
+ol > li:before {
+  content: counters(item, ".") ". ";
+  display: table-cell;
+  padding-right: 0.6em;
+}
+
+li ol > li {
+  margin: 0;
+}
+
+li ol > li:before {
+  content: counters(item, ".") " ";
+}
+
+ol.lowerAlpha li:before {
+  content: "(" counter(item, lower-alpha) ") ";
+  padding-right: 0.6em;
+}
+
+ol.roman li:before {
+  content: "(" counter(item, lower-roman) ") ";
+}
+
+ol.upperAlpha li:before {
+  content: "(" counter(item, upper-alpha) ") ";
+}
+
+.noBullet li:before {
+  content: "";
+  padding-right: 0;
+}

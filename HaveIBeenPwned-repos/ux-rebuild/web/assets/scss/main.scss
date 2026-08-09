@@ -1,0 +1,21 @@
+// Main Sass file
+// This file imports all other Sass partials
+
+// Variables and configuration
+@import "variables";
+
+// Theme configuration
+@import "theme";
+
+// Components
+@import "components/index";
+
+// Pages
+@import "pages/dashboard_internal";
+@import "pages/faq";
+
+// Utilities
+@import "utilities/index";
+
+// Custom styles
+@import "custom";

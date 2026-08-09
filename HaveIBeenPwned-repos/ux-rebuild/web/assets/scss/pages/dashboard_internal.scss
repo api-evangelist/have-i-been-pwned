@@ -1,0 +1,625 @@
+// Import variables if needed
+@import "../variables";
+
+// Dashboard Card Styling
+.card-glow {
+  box-shadow:
+    0 0 0 1px rgba(var(--bs-primary-rgb), 0.1),
+    0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow:
+      0 0 0 1px rgba(var(--bs-primary-rgb), 0.2),
+      0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+}
+
+// Avatar Circle
+.avatar-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #fff;
+}
+
+// Sidebar Styling
+.sidebar-section {
+  margin-bottom: 1.5rem;
+}
+
+.sidebar-heading {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+// Dashboard Statistics
+.dashboard-stat-card {
+  transition: all 0.2s ease;
+  height: 120px;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    background-color: rgba(var(--bs-primary-rgb), 0.05);
+  }
+}
+
+.dashboard-stat-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bg-primary-transparent {
+  background-color: rgba(var(--bs-primary-rgb), 0.1);
+}
+
+// Breach Table Styling
+.breach-logo {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+}
+
+.breach-data-cell {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 300px;
+}
+
+.breach-col-name {
+  width: 40%;
+}
+
+.breach-col-date {
+  width: 15%;
+}
+
+.breach-col-data {
+  width: 35%;
+}
+
+.breach-col-action {
+  width: 10%;
+}
+
+// Data Class Cards
+.data-class-card {
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: rgba(var(--bs-primary-rgb), 0.05);
+  }
+}
+
+// Recommended Actions
+.recommended-action-item {
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: rgba(var(--bs-primary-rgb), 0.05);
+  }
+}
+
+.recommended-action-icon {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Partner recommendation styles */
+.partner-recommendation {
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: rgba(var(--bs-dark-rgb), 0.2);
+  }
+}
+
+.partner-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.partner-logo-wide {
+  height: 25px;
+  object-fit: contain;
+}
+
+.sponsored-text {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+// Border Primary Custom
+.border-primary-custom {
+  border-color: rgba(var(--bs-primary-rgb), 0.2) !important;
+}
+
+// Notification Components
+.notification-option {
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: rgba(var(--bs-primary-rgb), 0.05);
+  }
+}
+
+.notification-icon {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notification-success {
+  border-left-color: 1px;
+}
+
+// Form Switch Styling
+.form-switch {
+  display: flex;
+  align-items: end;
+  justify-content: center;
+
+  .form-check-input {
+    width: 3em;
+    height: 1.5em;
+    cursor: pointer;
+  }
+}
+
+// Subscription Status Card
+.subscription-status-card {
+  border-left: 4px solid var(--bs-primary);
+}
+
+.subscription-icon {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// API Doc Cards
+.api-doc-card {
+  height: 100%;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: rgba(var(--bs-primary-rgb), 0.05);
+  }
+}
+
+// API Key Section Styling
+.api-key-section {
+  .input-group {
+    .form-control {
+      background-color: rgba(var(--bs-dark-rgb), 0.03);
+      font-family: monospace;
+      letter-spacing: 0.5px;
+    }
+  }
+}
+
+// Return notification styling
+#returnNotificationPlaceholder {
+  position: relative;
+  z-index: 1000;
+}
+
+// Hover links
+.hover-white {
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: white !important;
+  }
+}
+
+.list-group.list-group-flush.nav-pills {
+  overflow: hidden;
+
+  .list-group-item {
+    background-color: transparent;
+    border-color: rgba(var(--bs-primary-rgb), 0.1);
+    color: var(--bs-body-color);
+    transition: all 0.2s ease;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.25rem;
+    border-radius: var(--bs-border-radius-sm) !important;
+    border: 1px solid transparent;
+
+    &:hover:not(.active) {
+      background-color: rgba(var(--bs-primary-rgb), 0.05);
+      color: var(--bs-primary);
+    }
+
+    &.active {
+      background-color: rgba(var(--bs-primary-rgb), 0.1);
+      color: var(--bs-primary);
+      border-color: rgba(var(--bs-primary-rgb), 0.2);
+      font-weight: 500;
+      box-shadow: 0 0 0 1px rgba(var(--bs-primary-rgb), 0.2);
+    }
+
+    i {
+      width: 20px;
+      text-align: center;
+      margin-right: 0.5rem;
+    }
+  }
+}
+
+// Domain search animation styles
+.domains-container {
+  position: relative;
+  width: 100%;
+}
+
+.domain-view {
+  width: 100%;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.domain-search-view {
+  width: 100%;
+  display: none;
+  opacity: 0;
+}
+
+.domain-view.slide-left {
+  display: none;
+  opacity: 0;
+}
+
+.domain-search-view.slide-left {
+  display: block;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.domain-search-result-item {
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: rgba(var(--bs-primary-rgb), 0.05);
+  }
+}
+
+.domain-back-button {
+  cursor: pointer;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--bs-primary);
+  }
+}
+
+// Enhance domain search button
+.domain-search-btn {
+  transition: all 0.3s ease;
+
+  i {
+    transition: transform 0.3s ease;
+  }
+
+  &:hover {
+    i {
+      transform: scale(1.2);
+    }
+  }
+}
+
+// Verification Modal Tabs
+#verificationTabs {
+  border-bottom: 2px solid var(--bs-primary);
+
+  .nav-link {
+    padding: 0.75rem 1.25rem;
+    color: var(--bs-body-color);
+    border: none;
+    border-radius: 0.375rem 0.375rem 0 0;
+    transition: all 0.2s ease-in-out;
+    position: relative;
+    font-weight: 500;
+
+    &:hover {
+      background-color: rgba(var(--bs-primary-rgb), 0.05);
+    }
+
+    &.active {
+      color: white;
+      background-color: var(--bs-primary);
+      border-bottom: 2px solid var(--bs-primary);
+      margin-bottom: -2px;
+
+      i {
+        color: white !important;
+      }
+    }
+  }
+}
+
+// Tab content styling
+#verificationTabContent {
+  background-color: rgba(var(--bs-body-bg-rgb), 0.5);
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+// Code blocks in cards
+.card-glass code {
+  display: block;
+  padding: 0.5rem;
+  background-color: rgba(var(--bs-dark-rgb), 0.2);
+  border-radius: 0.25rem;
+  word-break: break-all;
+}
+
+// Logo mark spinner for domain verification
+.logo-mark-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Subscription tab positioning
+// Can be removed when the demo state toggle is removed
+#subscription {
+  position: relative;
+}
+
+// Progress bar widths - for demo purposes
+.progress-width-34 {
+  width: 34% !important;
+}
+
+.progress-width-60 {
+  width: 60% !important;
+}
+
+// Email update button sizing
+.btn-update-email {
+  --btn-min-width: 140px;
+  --btn-min-height: 38px;
+}
+
+#userEmail {
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  color: white; /* Ensure text is visible */
+}
+
+/* Adjust avatar-circle for icon */
+.avatar-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-circle .bi-person-fill {
+  font-size: 1.5rem;
+}
+
+// Customer Management Styling
+.disabled-section {
+  opacity: 0.6;
+  pointer-events: none;
+
+  input,
+  select,
+  textarea,
+  button {
+    background-color: rgba(var(--bs-secondary-rgb), 0.1) !important;
+    color: var(--bs-secondary) !important;
+    cursor: not-allowed !important;
+  }
+}
+
+// Dropdown component styling (matching pwned_websites.html)
+.feature-item-hover {
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: rgba(var(--bs-primary-rgb), 0.05) !important;
+  }
+}
+
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
+.user-select-none {
+  user-select: none !important;
+}
+
+.chevron-icon {
+  transition: transform 0.2s ease;
+}
+
+.dropdown[aria-expanded="true"] .chevron-icon {
+  transform: rotate(180deg);
+}
+
+.min-w-240 {
+  min-width: 240px !important;
+}
+
+// Text color utilities
+.text-gray-300 {
+  color: #d1d5db !important;
+}
+
+// Fix circular icon in dropdown
+#customerActionsDropdown .btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50% !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  i {
+    font-size: 1rem;
+  }
+}
+
+// Customer Info Items - Modern SaaS styling
+.customer-info-item {
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: rgba(var(--bs-primary-rgb), 0.03);
+  border: 1px solid rgba(var(--bs-primary-rgb), 0.1);
+  transition: all 0.2s ease;
+  height: 100%;
+
+  &:hover {
+    background-color: rgba(var(--bs-primary-rgb), 0.05);
+    border-color: rgba(var(--bs-primary-rgb), 0.15);
+  }
+}
+
+.customer-info-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--grey-400);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+}
+
+.customer-info-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1.4;
+
+  // Handle long email addresses
+  word-break: break-word;
+
+  // Style for badges within values
+  .badge {
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+
+  // Style for status indicators
+  .text-success {
+    font-weight: 500;
+
+    i {
+      opacity: 0.8;
+    }
+  }
+}
+
+// Button group positioning in card
+.card.position-relative {
+  .btn-group {
+    z-index: 10;
+
+    .btn {
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 0.4rem 0.8rem;
+
+      &.dropdown-toggle {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+      }
+    }
+
+    #generate-renewal-quote-action {
+      border-top-left-radius: 8px;
+      border-bottom-left-radius: 8px;
+    }
+
+    // Fix Bootstrap's button group spacing and border radius issues
+    // Remove gaps between buttons
+    .btn + .btn,
+    .btn + .btn-group .btn,
+    .btn-group + .btn,
+    .btn-group + .btn-group .btn {
+      margin-left: -1px;
+    }
+
+    // Specific fix for dropdown button connection
+    .btn-group .btn.dropdown-toggle {
+      border-left: 0;
+    }
+
+    // Fix dropdown positioning to prevent jumping
+    .dropdown-menu {
+      min-width: 200px;
+      // Override global dropdown styles that interfere with Popper positioning
+      margin-top: 0 !important; // Remove the global margin-top: 0.5rem
+      animation: none !important; // Remove the fadeIn animation that uses transform
+      transform: none !important; // Ensure no transform interference
+
+      // Force positioning below the trigger
+      top: 100% !important;
+      bottom: auto !important;
+    }
+  }
+
+  .position-absolute {
+    top: 1rem;
+    right: 1rem;
+  }
+}
+
+// Responsive adjustments for button group
+@media (max-width: 768px) {
+  .card.position-relative .position-absolute {
+    position: relative !important;
+    top: 10px !important;
+    right: 25px !important;
+    margin: 0 0 1rem 0 !important;
+    display: flex;
+    justify-content: flex-end;
+
+    .btn-group {
+      .btn {
+        flex: 1;
+      }
+    }
+  }
+}
+
+// Domains table — uniform row height so the warning sub-line on some rows
+// doesn't make those rows visually stand out from the rest.
+#domainsTableBody td {
+  padding-top: 0.875rem;
+  padding-bottom: 0.875rem;
+}
