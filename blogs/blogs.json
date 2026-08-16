@@ -5,7 +5,7 @@
       "source": "https://www.troyhunt.com/rss/",
       "feed_url": "https://www.troyhunt.com/rss/",
       "title": "",
-      "saved": 0,
+      "saved": 2,
       "method": "feed"
     },
     {
@@ -19,7 +19,7 @@
       "source": "https://haveibeenpwned.com/feed/breaches/",
       "feed_url": "https://haveibeenpwned.com/feed/breaches/",
       "title": "",
-      "saved": 0,
+      "saved": 4,
       "method": "feed"
     },
     {
@@ -30,6 +30,6 @@
       "method": "discovered"
     }
   ],
-  "post_count": 55,
-  "fetched": "2026-08-06T14:08:46Z"
+  "post_count": 61,
+  "fetched": "2026-08-15T12:11:08Z"
 }
