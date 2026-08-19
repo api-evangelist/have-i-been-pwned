@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Have I Been Pwned API v3 Breach Pasteaccount API",
+    "version": "3.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Pasteaccount",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all pastes for an account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://haveibeenpwned.com/api/v3/pasteaccount/:account",
+            "headers": [
+              {
+                "name": "user-agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "account",
+                "value": "",
+                "type": "path",
+                "description": "URL-encoded email address to search for pastes"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "hibp-api-key",
+              "value": "{{hibp-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Available on Core, Pro, and High RPM subscriptions. Searches for pastes containing the supplied email address. The address is not case-sensitive, is trimmed of leading or trailing whitespace, and should always be URL encoded. This is an authenticated API requiring both the hibp-api-key and user-agent headers."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

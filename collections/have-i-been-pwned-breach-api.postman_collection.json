@@ -1,0 +1,237 @@
+{
+  "item": [
+    {
+      "id": "0ce1d0e6-144a-4044-8b0c-e3989a9b2de0",
+      "name": "Breach",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "21f43331-ce54-456d-8b72-ca9de4432620",
+          "name": "Get a single breach by name",
+          "request": {
+            "name": "Get a single breach by name",
+            "description": {
+              "content": "Returns the full breach model for a single breach identified by its stable Name value. This endpoint is unauthenticated, but it still requires a user-agent header.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "breach",
+                ":name"
+              ],
+              "host": [
+                "{{breach-name-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) Unique breach name (Pascal-cased, stable identifier)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) User agent string identifying the consuming application. Required on all documented requests, including unauthenticated endpoints; missing user agents may receive HTTP 403 responses.",
+                "key": "user-agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8fe0b18c-d359-46f2-82fb-900a65841b58",
+              "name": "A single breach object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "breach",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{breach-name-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) Unique breach name (Pascal-cased, stable identifier)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) User agent string identifying the consuming application. Required on all documented requests, including unauthenticated endpoints; missing user agents may receive HTTP 403 responses.",
+                    "key": "user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Name\": \"string\",\n  \"Title\": \"string\",\n  \"Domain\": \"string\",\n  \"BreachDate\": \"1952-10-18\",\n  \"AddedDate\": \"1960-07-13T18:26:39.020Z\",\n  \"ModifiedDate\": \"2007-12-25T01:50:39.087Z\",\n  \"PwnCount\": 2048,\n  \"Description\": \"string\",\n  \"DataClasses\": [\n    \"string\",\n    \"string\"\n  ],\n  \"IsVerified\": false,\n  \"IsFabricated\": false,\n  \"IsSensitive\": true,\n  \"IsRetired\": false,\n  \"IsSpamList\": true,\n  \"IsMalware\": true,\n  \"IsSubscriptionFree\": true,\n  \"IsStealerLog\": false,\n  \"LogoPath\": \"https://bOM.oyhvlGLm-nnSIw,mR1TM5\",\n  \"Attribution\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f288192-4a2e-49af-9d8c-1009647d2c00",
+              "name": "Forbidden — missing user agent",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "breach",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{breach-name-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) Unique breach name (Pascal-cased, stable identifier)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) User agent string identifying the consuming application. Required on all documented requests, including unauthenticated endpoints; missing user agents may receive HTTP 403 responses.",
+                    "key": "user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 5258,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "755d43c7-e3a6-4f6e-8137-3bed56f4398f",
+              "name": "Not found — breach name invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "breach",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{breach-name-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) Unique breach name (Pascal-cased, stable identifier)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) User agent string identifying the consuming application. Required on all documented requests, including unauthenticated endpoints; missing user agents may receive HTTP 403 responses.",
+                    "key": "user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 5258,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://haveibeenpwned.com/api/v3",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://haveibeenpwned.com/api/v3",
+      "key": "breach-name-Url"
+    }
+  ],
+  "info": {
+    "_postman_id": "589f0f4c-bda0-4cfa-a164-a8ae1e4ee9cd",
+    "name": "Have I Been Pwned API v3 Breach API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Version 3 of the Have I Been Pwned API. Authenticated APIs for breaches by account, pastes, domain search, domain verification, stealer logs, and subscription status require both the hibp-api-key and user-agent headers. Availability varies by subscription tier and is noted per operation. The Pwned Passwords range API is free and does not require authentication.",
+      "type": "text/plain"
+    }
+  }
+}

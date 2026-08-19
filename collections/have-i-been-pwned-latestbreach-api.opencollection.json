@@ -1,0 +1,35 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Have I Been Pwned API v3 Breach Latestbreach API",
+    "version": "3.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Latestbreach",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the most recently added breach",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://haveibeenpwned.com/api/v3/latestbreach",
+            "headers": [
+              {
+                "name": "user-agent",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Returns the most recently added breach based on AddedDate. This endpoint is unauthenticated, but it still requires a user-agent header."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

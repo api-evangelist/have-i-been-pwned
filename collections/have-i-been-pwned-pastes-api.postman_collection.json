@@ -1,0 +1,355 @@
+{
+  "item": [
+    {
+      "id": "d44aa998-ea9d-4855-992e-38e851e59413",
+      "name": "Pastes",
+      "description": {
+        "content": "Lookup pastes referencing an email address.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5b5cf055-c4e7-4526-937e-f5d90fde1bd4",
+          "name": "Get Pastes For An Account",
+          "request": {
+            "name": "Get Pastes For An Account",
+            "description": {
+              "content": "Returns all pastes referencing the supplied email address, sorted chronologically (newest first).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pasteaccount",
+                ":account"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<email>",
+                  "key": "account",
+                  "description": "(Required) URL-encoded email address to search."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2430b75b-95a6-4b4d-bc5f-82a432e959b7",
+              "name": "A list of pastes referencing the account.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pasteaccount",
+                    ":account"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<email>",
+                      "key": "account",
+                      "description": "(Required) URL-encoded email address to search."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "hibp-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"Source\": \"string\",\n    \"Id\": \"string\",\n    \"EmailCount\": 7302,\n    \"Title\": \"string\",\n    \"Date\": \"1960-01-18T05:35:24.613Z\"\n  },\n  {\n    \"Source\": \"string\",\n    \"Id\": \"string\",\n    \"EmailCount\": 6117,\n    \"Title\": \"string\",\n    \"Date\": \"2007-05-24T22:28:59.149Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38d93719-b142-4135-a400-78fbe4b5b57a",
+              "name": "The `hibp-api-key` header is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pasteaccount",
+                    ":account"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<email>",
+                      "key": "account",
+                      "description": "(Required) URL-encoded email address to search."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "hibp-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 1322,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd3cbfea-648c-44a6-9bee-12cd309c9979",
+              "name": "The request is forbidden. Common causes include a missing `user-agent` header,\nquerying an unverified domain, or a feature not included in the calling subscription.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pasteaccount",
+                    ":account"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<email>",
+                      "key": "account",
+                      "description": "(Required) URL-encoded email address to search."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "hibp-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 1322,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "84356174-efb4-4044-8c7d-8fa1f55530f3",
+              "name": "No record matched the supplied identifier.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pasteaccount",
+                    ":account"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<email>",
+                      "key": "account",
+                      "description": "(Required) URL-encoded email address to search."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "hibp-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "24386ec1-e4db-41e5-b937-7ad19e0dc5f3",
+              "name": "Rate limit exceeded. Inspect the `retry-after` header to determine when to retry.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pasteaccount",
+                    ":account"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<email>",
+                      "key": "account",
+                      "description": "(Required) URL-encoded email address to search."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "hibp-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds to wait before retrying.",
+                  "key": "retry-after",
+                  "value": "9220"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 1322,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://haveibeenpwned.com/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "hibp-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1bfdd6b7-020a-4341-942b-1c0b91362e63",
+    "name": "Have I Been Pwned API v3 Breached Accounts Pastes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Have I Been Pwned (HIBP) API allows the list of pwned accounts (email addresses, domains,\npasswords, and stealer log entries) to be quickly searched via REST. Authenticated endpoints\nrequire an `hibp-api-key` header. All requests must send a `user-agent` header that accurately\nidentifies the consuming application. Subscriptions range from Pwned 1 to Pwned 5.\n\n\nContact Support:\n Name: Have I Been Pwned",
+      "type": "text/plain"
+    }
+  }
+}

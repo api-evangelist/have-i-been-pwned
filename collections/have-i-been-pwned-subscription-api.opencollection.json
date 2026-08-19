@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Have I Been Pwned API v3 Breach Subscription API",
+    "version": "3.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Subscription",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get current subscription status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://haveibeenpwned.com/api/v3/subscription/status",
+            "headers": [
+              {
+                "name": "user-agent",
+                "value": ""
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "hibp-api-key",
+              "value": "{{hibp-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Available on Core, Pro, and High RPM subscriptions. Returns details of the current subscription represented by the supplied hibp-api-key, including plan capabilities such as stealer-log access, breached-account k-anonymity access, bulk domain add features, and monitored-domain limits."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

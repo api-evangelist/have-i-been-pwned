@@ -1,0 +1,295 @@
+{
+  "item": [
+    {
+      "id": "e834d35d-dfeb-4fdb-b676-2de5bb01b440",
+      "name": "Subscription",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "30d972f3-b5a4-49a8-81cf-f2916a964c80",
+          "name": "Get current subscription status",
+          "request": {
+            "name": "Get current subscription status",
+            "description": {
+              "content": "Available on Core, Pro, and High RPM subscriptions. Returns details of the current subscription represented by the supplied hibp-api-key, including plan capabilities such as stealer-log access, breached-account k-anonymity access, bulk domain add features, and monitored-domain limits.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "subscription",
+                "status"
+              ],
+              "host": [
+                "{{subscription-status-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) User agent string identifying the consuming application. Required on all documented requests, including unauthenticated endpoints; missing user agents may receive HTTP 403 responses.",
+                "key": "user-agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "hibp-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6a31f939-a7fe-4c4a-9c2a-4e70a94dec48",
+              "name": "Current subscription capabilities and limits for the supplied API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscription",
+                    "status"
+                  ],
+                  "host": [
+                    "{{subscription-status-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "hibp-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) User agent string identifying the consuming application. Required on all documented requests, including unauthenticated endpoints; missing user agents may receive HTTP 403 responses.",
+                    "key": "user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"SubscriptionName\": \"string\",\n  \"Description\": \"string\",\n  \"SubscribedUntil\": \"1989-05-01T19:35:03.059Z\",\n  \"Rpm\": 4252,\n  \"DomainSearchMaxBreachedAccounts\": 9451,\n  \"MaxBreachedDomains\": 4635,\n  \"IncludesStealerLogs\": false,\n  \"IncludesBulkDomainAdd\": false,\n  \"IncludesAutoSubdomainVerification\": false,\n  \"IncludesCustomerDomains\": false,\n  \"IncludesKAnon\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b485ffff-a16a-4486-b250-93bc6cfde45d",
+              "name": "Unauthorized — the hibp-api-key header was missing, malformed, or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscription",
+                    "status"
+                  ],
+                  "host": [
+                    "{{subscription-status-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "hibp-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) User agent string identifying the consuming application. Required on all documented requests, including unauthenticated endpoints; missing user agents may receive HTTP 403 responses.",
+                    "key": "user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 646,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa9627e5-f44b-4307-926b-408f504b786d",
+              "name": "Forbidden — no user agent has been specified in the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscription",
+                    "status"
+                  ],
+                  "host": [
+                    "{{subscription-status-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "hibp-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) User agent string identifying the consuming application. Required on all documented requests, including unauthenticated endpoints; missing user agents may receive HTTP 403 responses.",
+                    "key": "user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 646,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe95f438-ad91-47ee-83d8-4418801029fa",
+              "name": "Not found — no active subscription was found for the supplied API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscription",
+                    "status"
+                  ],
+                  "host": [
+                    "{{subscription-status-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "hibp-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) User agent string identifying the consuming application. Required on all documented requests, including unauthenticated endpoints; missing user agents may receive HTTP 403 responses.",
+                    "key": "user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 404,\n  \"message\": \"No active subscription found.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://haveibeenpwned.com/api/v3",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://haveibeenpwned.com/api/v3",
+      "key": "subscription-status-Url"
+    }
+  ],
+  "info": {
+    "_postman_id": "957ea2d2-963e-4ece-bfd8-e85c094ee69e",
+    "name": "Have I Been Pwned API v3 Breach Subscription API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Version 3 of the Have I Been Pwned API. Authenticated APIs for breaches by account, pastes, domain search, domain verification, stealer logs, and subscription status require both the hibp-api-key and user-agent headers. Availability varies by subscription tier and is noted per operation. The Pwned Passwords range API is free and does not require authentication.",
+      "type": "text/plain"
+    }
+  }
+}

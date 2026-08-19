@@ -1,0 +1,705 @@
+{
+  "item": [
+    {
+      "id": "1b6e6adc-4099-43de-b5f6-3e3a5637e525",
+      "name": "Domain Search",
+      "description": {
+        "content": "Verify and search domains you control.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ff09bdd2-36b2-4bec-b49d-e35119300d4c",
+          "name": "Get Breached Email Addresses For A Domain",
+          "request": {
+            "name": "Get Breached Email Addresses For A Domain",
+            "description": {
+              "content": "Returns email aliases on the supplied verified domain that appear in breaches.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "breacheddomain",
+                ":domain"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domain",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eecc042a-269b-4967-81f7-46cf18ff268b",
+              "name": "A map of alias to breach names.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "breacheddomain",
+                    ":domain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "hibp-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": [\n    \"string\",\n    \"string\"\n  ],\n  \"key_1\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d1f82823-e2f2-4e8b-98c4-23adb6843f9a",
+              "name": "The `hibp-api-key` header is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "breacheddomain",
+                    ":domain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "hibp-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 7883,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1dd9bc5d-4e13-4b2a-9852-5de70d0a1128",
+              "name": "The request is forbidden. Common causes include a missing `user-agent` header,\nquerying an unverified domain, or a feature not included in the calling subscription.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "breacheddomain",
+                    ":domain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "hibp-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 7883,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2ec105c5-adde-41a5-af92-460dd1375e1f",
+              "name": "No record matched the supplied identifier.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "breacheddomain",
+                    ":domain"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domain",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "hibp-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1e9f42ac-b31b-464f-be81-eb7e5291f45a",
+          "name": "List Subscribed Domains",
+          "request": {
+            "name": "List Subscribed Domains",
+            "description": {
+              "content": "Returns the domains the calling subscription is currently monitoring.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "subscribeddomains"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3d5309b7-e4bd-4197-98f0-6c179e62e144",
+              "name": "A list of subscribed domains.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscribeddomains"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "hibp-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"DomainName\": \"string\",\n    \"PwnCount\": 4923,\n    \"PwnCountExcludingSpamLists\": 7250,\n    \"PwnCountExcludingSpamListsAtLastSubscriptionRenewal\": 7969,\n    \"NextSubscriptionRenewal\": \"1991-02-09T19:07:57.586Z\"\n  },\n  {\n    \"DomainName\": \"string\",\n    \"PwnCount\": 4633,\n    \"PwnCountExcludingSpamLists\": 2662,\n    \"PwnCountExcludingSpamListsAtLastSubscriptionRenewal\": 6365,\n    \"NextSubscriptionRenewal\": \"1968-04-10T07:00:10.101Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0dc5613d-3668-4507-ae5c-848e071a3e60",
+              "name": "The `hibp-api-key` header is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subscribeddomains"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "hibp-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 7883,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0e14e160-d9fd-4aad-9fb0-e1203727781b",
+          "name": "Generate A DNS Verification Token",
+          "request": {
+            "name": "Generate A DNS Verification Token",
+            "description": {
+              "content": "Generates a DNS TXT record value used to verify ownership of a domain.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "domainverification",
+                "generateDnsToken"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"DomainName\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b5cb9178-39aa-45df-82aa-1ea33abc73c9",
+              "name": "A DNS TXT record value.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "domainverification",
+                    "generateDnsToken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "hibp-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DomainName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"txtRecordValue\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "95759de8-9d5e-4798-98ef-65bd0ba4865a",
+          "name": "Verify A DNS Verification Token",
+          "request": {
+            "name": "Verify A DNS Verification Token",
+            "description": {
+              "content": "Triggers DNS verification of a previously generated TXT record.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "domainverification",
+                "verifyDnsToken"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"DomainName\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b9dbeb51-bcc9-4a75-bdf0-0842de57ed71",
+              "name": "Domain verification succeeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "domainverification",
+                    "verifyDnsToken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "hibp-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DomainName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "84f78615-82fc-4976-88cc-5409e77019bd",
+          "name": "Send A Domain Verification Email",
+          "request": {
+            "name": "Send A Domain Verification Email",
+            "description": {
+              "content": "Sends a verification email to a standard alias on the domain.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "domainverification",
+                "sendEmail"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"DomainName\": \"<string>\",\n  \"EmailAlias\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "63453d55-7418-4c83-9284-5d44d0f79231",
+              "name": "Verification email sent.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "domainverification",
+                    "sendEmail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "hibp-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DomainName\": \"<string>\",\n  \"EmailAlias\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://haveibeenpwned.com/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "hibp-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3af7c758-bb68-438f-b4e3-2ba1eecc18a0",
+    "name": "Have I Been Pwned API v3 Breached Accounts Domain Search API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Have I Been Pwned (HIBP) API allows the list of pwned accounts (email addresses, domains,\npasswords, and stealer log entries) to be quickly searched via REST. Authenticated endpoints\nrequire an `hibp-api-key` header. All requests must send a `user-agent` header that accurately\nidentifies the consuming application. Subscriptions range from Pwned 1 to Pwned 5.\n\n\nContact Support:\n Name: Have I Been Pwned",
+      "type": "text/plain"
+    }
+  }
+}

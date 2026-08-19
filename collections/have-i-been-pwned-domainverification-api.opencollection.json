@@ -1,0 +1,99 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Have I Been Pwned API v3 Breach Domainverification API",
+    "version": "3.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Domainverification",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Generate a DNS verification token for a domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://haveibeenpwned.com/api/v3/domainverification/generatednstoken",
+            "headers": [
+              {
+                "name": "user-agent",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "hibp-api-key",
+              "value": "{{hibp-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Available on Pro subscriptions. Generates the domain-specific TXT record value used to verify control of a domain via DNS before it can be searched through the domain search APIs."
+        },
+        {
+          "info": {
+            "name": "Verify a DNS token for a domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://haveibeenpwned.com/api/v3/domainverification/verifydnstoken",
+            "headers": [
+              {
+                "name": "user-agent",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "hibp-api-key",
+              "value": "{{hibp-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Available on Pro subscriptions. Checks the hibp-verify TXT record on the requested domain and, if it matches the previously generated token, marks the domain as verified for domain search."
+        },
+        {
+          "info": {
+            "name": "Send a domain verification approval email",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://haveibeenpwned.com/api/v3/domainverification/sendemail",
+            "headers": [
+              {
+                "name": "user-agent",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "hibp-api-key",
+              "value": "{{hibp-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Available on Pro subscriptions. Sends a verification email to one of the configured aliases on the target domain so that domain control can be approved via a link in the email."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

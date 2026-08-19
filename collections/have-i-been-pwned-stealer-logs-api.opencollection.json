@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Have I Been Pwned API v3 Breached Accounts Stealer Logs API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "hibp-api-key",
+      "value": "{{hibp-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Stealer Logs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Stealer Log Domains For An Email",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://haveibeenpwned.com/api/v3/stealerlogsbyemail/:email",
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns website domains exposed in stealer log corpora for the supplied email address."
+        },
+        {
+          "info": {
+            "name": "Get Stealer Log Emails For A Website Domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://haveibeenpwned.com/api/v3/stealerlogsbywebsitedomain/:domain",
+            "params": [
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns email addresses exposed against a verified website domain."
+        },
+        {
+          "info": {
+            "name": "Get Stealer Log Aliases For An Email Domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://haveibeenpwned.com/api/v3/stealerlogsbyemaildomain/:domain",
+            "params": [
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns email aliases (and the website domains exposing them) for the supplied verified email domain."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

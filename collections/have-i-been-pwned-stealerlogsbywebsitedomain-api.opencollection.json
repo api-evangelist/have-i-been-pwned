@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Have I Been Pwned API v3 Breach Stealerlogsbywebsitedomain API",
+    "version": "3.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Stealerlogsbywebsitedomain",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all stealer log email addresses for a website domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://haveibeenpwned.com/api/v3/stealerlogsbywebsitedomain/:domain",
+            "headers": [
+              {
+                "name": "user-agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path",
+                "description": "Website domain to search for in stealer logs. Must be a verified domain in the domain search dashboard."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "hibp-api-key",
+              "value": "{{hibp-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Available on Pro subscriptions. Searches stealer-log data by the website domain victims were authenticating to when their credentials were captured. The domain must already be added to the domain search dashboard and successfully verified. The current subscription must include stealer-log access."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

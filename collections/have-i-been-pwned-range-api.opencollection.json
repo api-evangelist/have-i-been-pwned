@@ -1,0 +1,53 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Have I Been Pwned API v3 Breach Range API",
+    "version": "3.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Range",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Pwned Passwords range search (k-Anonymity)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://haveibeenpwned.com/api/v3/range/:prefix",
+            "headers": [
+              {
+                "name": "user-agent",
+                "value": ""
+              },
+              {
+                "name": "Add-Padding",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "prefix",
+                "value": "",
+                "type": "path",
+                "description": "First 5 characters of a SHA-1 or NTLM hash (hexadecimal, not case-sensitive)"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Returns NTLM hash suffixes when set to 'ntlm'. When the mode is not specified or is any value other than 'ntlm', the resulting hashes will be in SHA-1 form."
+              }
+            ]
+          },
+          "docs": "Free Pwned Passwords range search using k-anonymity. This endpoint does not require authentication and is not rate limited, but it still requires a user-agent header. Provide the first 5 characters of either a SHA-1 or NTLM hash to receive matching suffixes and prevalence counts."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

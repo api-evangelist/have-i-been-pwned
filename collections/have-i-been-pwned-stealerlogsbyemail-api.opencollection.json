@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Have I Been Pwned API v3 Breach Stealerlogsbyemail API",
+    "version": "3.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Stealerlogsbyemail",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all stealer log domains for an email address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://haveibeenpwned.com/api/v3/stealerlogsbyemail/:email",
+            "headers": [
+              {
+                "name": "user-agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "path",
+                "description": "URL-encoded email address to search for stealer logs. Must be on a verified domain in the domain search dashboard."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "hibp-api-key",
+              "value": "{{hibp-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Available on Pro subscriptions. Searches stealer-log data by the full email address captured by an info stealer. The email address must be on a domain already added to the domain search dashboard and successfully verified. The current subscription must include stealer-log access."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

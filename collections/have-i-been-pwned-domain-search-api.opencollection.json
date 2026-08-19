@@ -1,0 +1,100 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Have I Been Pwned API v3 Breached Accounts Domain Search API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "hibp-api-key",
+      "value": "{{hibp-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Domain Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Breached Email Addresses For A Domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://haveibeenpwned.com/api/v3/breacheddomain/:domain",
+            "params": [
+              {
+                "name": "domain",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns email aliases on the supplied verified domain that appear in breaches."
+        },
+        {
+          "info": {
+            "name": "List Subscribed Domains",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://haveibeenpwned.com/api/v3/subscribeddomains"
+          },
+          "docs": "Returns the domains the calling subscription is currently monitoring."
+        },
+        {
+          "info": {
+            "name": "Generate A DNS Verification Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://haveibeenpwned.com/api/v3/domainverification/generateDnsToken",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates a DNS TXT record value used to verify ownership of a domain."
+        },
+        {
+          "info": {
+            "name": "Verify A DNS Verification Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://haveibeenpwned.com/api/v3/domainverification/verifyDnsToken",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Triggers DNS verification of a previously generated TXT record."
+        },
+        {
+          "info": {
+            "name": "Send A Domain Verification Email",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://haveibeenpwned.com/api/v3/domainverification/sendEmail",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sends a verification email to a standard alias on the domain."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

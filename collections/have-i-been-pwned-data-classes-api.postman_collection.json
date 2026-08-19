@@ -1,0 +1,127 @@
+{
+  "item": [
+    {
+      "id": "ea1acc84-c368-49ea-9999-203c280e7b9d",
+      "name": "Data Classes",
+      "description": {
+        "content": "Enumerate classes of data exposed across breaches.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "06e83a87-7033-4577-9b77-680b9fdf4330",
+          "name": "Get All Data Classes",
+          "request": {
+            "name": "Get All Data Classes",
+            "description": {
+              "content": "Returns the alphabetically ordered list of data classes that may be exposed in breaches.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dataclasses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6a97a36a-f16f-428d-93e6-99d8776eacad",
+              "name": "An alphabetically ordered list of data class names.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataclasses"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "hibp-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  \"string\",\n  \"string\"\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://haveibeenpwned.com/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "hibp-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8792c0c9-5dd7-423f-84e7-6ecd6fcbb64a",
+    "name": "Have I Been Pwned API v3 Breached Accounts Data Classes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Have I Been Pwned (HIBP) API allows the list of pwned accounts (email addresses, domains,\npasswords, and stealer log entries) to be quickly searched via REST. Authenticated endpoints\nrequire an `hibp-api-key` header. All requests must send a `user-agent` header that accurately\nidentifies the consuming application. Subscriptions range from Pwned 1 to Pwned 5.\n\n\nContact Support:\n Name: Have I Been Pwned",
+      "type": "text/plain"
+    }
+  }
+}

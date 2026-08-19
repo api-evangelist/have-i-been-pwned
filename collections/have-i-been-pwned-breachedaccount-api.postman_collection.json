@@ -1,0 +1,1116 @@
+{
+  "item": [
+    {
+      "id": "9ed0cb91-34a7-467d-8bec-bca3a635be83",
+      "name": "Breachedaccount",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "84a95897-efd1-4909-851c-23043265a47f",
+          "name": "Get all breaches for an account",
+          "request": {
+            "name": "Get all breaches for an account",
+            "description": {
+              "content": "Available on Core, Pro, and High RPM subscriptions. Returns the breaches for the supplied account (email address, username, or phone number). The account is not case-sensitive and is trimmed of leading or trailing whitespace. The account should always be URL encoded. This is an authenticated API requiring both the hibp-api-key and user-agent headers. Test API keys can be used to query test accounts on the hibp-integration-tests.com domain.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "breachedaccount",
+                ":account"
+              ],
+              "host": [
+                "{{breachedaccount-account-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "truncateResponse",
+                  "value": "true",
+                  "description": "Returns the full breach model when false. By default, only the name of the breach is returned rather than the complete breach data."
+                },
+                {
+                  "disabled": false,
+                  "key": "domain",
+                  "value": "<string>",
+                  "description": "Filters the result set to only breaches against the domain specified. It is possible that one site (and consequently domain), is compromised on multiple occasions."
+                },
+                {
+                  "disabled": false,
+                  "key": "includeUnverified",
+                  "value": "true",
+                  "description": "Returns breaches that have been flagged as 'unverified'. By default, both verified and unverified breaches are returned when performing a search."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account",
+                  "description": "(Required) URL-encoded account to search for (email address, username, or phone number)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) User agent string identifying the consuming application. Required on all documented requests, including unauthenticated endpoints; missing user agents may receive HTTP 403 responses.",
+                "key": "user-agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "hibp-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0f7c85df-38f9-48f0-98e0-7095efda06b0",
+              "name": "A list of breaches for the account. By default the response is truncated to only the breach name. Set truncateResponse=false to receive the full breach model. Sensitive and retired breaches are not returned by the public API.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "breachedaccount",
+                    ":account"
+                  ],
+                  "host": [
+                    "{{breachedaccount-account-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "truncateResponse",
+                      "value": "true"
+                    },
+                    {
+                      "key": "domain",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeUnverified",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account",
+                      "description": "(Required) URL-encoded account to search for (email address, username, or phone number)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "hibp-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) User agent string identifying the consuming application. Required on all documented requests, including unauthenticated endpoints; missing user agents may receive HTTP 403 responses.",
+                    "key": "user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"Name\": \"string\"\n  },\n  {\n    \"Name\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3fe73544-9c95-4cd8-b47d-37d3d37c3e4d",
+              "name": "Bad request — the account does not comply with an acceptable format (i.e. it's an empty string)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "breachedaccount",
+                    ":account"
+                  ],
+                  "host": [
+                    "{{breachedaccount-account-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "truncateResponse",
+                      "value": "true"
+                    },
+                    {
+                      "key": "domain",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeUnverified",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account",
+                      "description": "(Required) URL-encoded account to search for (email address, username, or phone number)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "hibp-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) User agent string identifying the consuming application. Required on all documented requests, including unauthenticated endpoints; missing user agents may receive HTTP 403 responses.",
+                    "key": "user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 2304,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b39dfbbf-055b-444e-95be-4fe2cc8258f2",
+              "name": "Unauthorized — the API key provided was not valid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "breachedaccount",
+                    ":account"
+                  ],
+                  "host": [
+                    "{{breachedaccount-account-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "truncateResponse",
+                      "value": "true"
+                    },
+                    {
+                      "key": "domain",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeUnverified",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account",
+                      "description": "(Required) URL-encoded account to search for (email address, username, or phone number)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "hibp-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) User agent string identifying the consuming application. Required on all documented requests, including unauthenticated endpoints; missing user agents may receive HTTP 403 responses.",
+                    "key": "user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 401,\n  \"message\": \"Access denied due to missing hibp-api-key.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "274c3b0c-2ccb-4f13-8b81-fb3d7bc970db",
+              "name": "Forbidden — no user agent has been specified in the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "breachedaccount",
+                    ":account"
+                  ],
+                  "host": [
+                    "{{breachedaccount-account-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "truncateResponse",
+                      "value": "true"
+                    },
+                    {
+                      "key": "domain",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeUnverified",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account",
+                      "description": "(Required) URL-encoded account to search for (email address, username, or phone number)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "hibp-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) User agent string identifying the consuming application. Required on all documented requests, including unauthenticated endpoints; missing user agents may receive HTTP 403 responses.",
+                    "key": "user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 2304,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "23e419a5-0e1f-4c3a-9fe0-4b3f9187f78f",
+              "name": "Not found — the account could not be found and has therefore not been pwned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "breachedaccount",
+                    ":account"
+                  ],
+                  "host": [
+                    "{{breachedaccount-account-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "truncateResponse",
+                      "value": "true"
+                    },
+                    {
+                      "key": "domain",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeUnverified",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account",
+                      "description": "(Required) URL-encoded account to search for (email address, username, or phone number)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "hibp-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) User agent string identifying the consuming application. Required on all documented requests, including unauthenticated endpoints; missing user agents may receive HTTP 403 responses.",
+                    "key": "user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 2304,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e7b2a1a-ee07-4246-9a14-92dc1d9b30e4",
+              "name": "Too many requests — the rate limit has been exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "breachedaccount",
+                    ":account"
+                  ],
+                  "host": [
+                    "{{breachedaccount-account-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "truncateResponse",
+                      "value": "true"
+                    },
+                    {
+                      "key": "domain",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeUnverified",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account",
+                      "description": "(Required) URL-encoded account to search for (email address, username, or phone number)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "hibp-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) User agent string identifying the consuming application. Required on all documented requests, including unauthenticated endpoints; missing user agents may receive HTTP 403 responses.",
+                    "key": "user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds until retry (rounded up to the next whole second)",
+                  "key": "Retry-After",
+                  "value": "8482"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 429,\n  \"message\": \"Rate limit is exceeded. Try again in 2 seconds.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d3de3ceb-d4d8-4aef-add6-50ed979235d2",
+              "name": "Service unavailable — usually returned by Cloudflare if the underlying service is not available",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "breachedaccount",
+                    ":account"
+                  ],
+                  "host": [
+                    "{{breachedaccount-account-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "truncateResponse",
+                      "value": "true"
+                    },
+                    {
+                      "key": "domain",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeUnverified",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account",
+                      "description": "(Required) URL-encoded account to search for (email address, username, or phone number)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "hibp-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) User agent string identifying the consuming application. Required on all documented requests, including unauthenticated endpoints; missing user agents may receive HTTP 403 responses.",
+                    "key": "user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 2304,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "834fa4ca-e62f-4dd8-9bd1-74c0cf0d6851",
+          "name": "Get all breached account hashes for a range",
+          "request": {
+            "name": "Get all breached account hashes for a range",
+            "description": {
+              "content": "Available on Pro and High RPM subscriptions. Search breached accounts via k-anonymity by providing the first 6 characters of the SHA-1 hash of a normalised email address. The response contains matching hash suffixes and associated breach names after public filtering. Sensitive and retired breaches are not returned. Per the terms of use, any results that do not match the target account being searched must be discarded immediately and not stored or further processed.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "breachedaccount",
+                "range",
+                ":prefix"
+              ],
+              "host": [
+                "{{breachedaccount-range-prefix-Url}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "prefix",
+                  "description": "(Required) First 6 characters of the SHA-1 hash of the email address to search for (hexadecimal, not case-sensitive)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) User agent string identifying the consuming application. Required on all documented requests, including unauthenticated endpoints; missing user agents may receive HTTP 403 responses.",
+                "key": "user-agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "hibp-api-key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1be3e8c9-4edc-4fd8-bf61-fbe60f558bf5",
+              "name": "Hash suffixes and breach names for accounts in the requested range. Sensitive breaches are removed and any suffix with no remaining public breaches is omitted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "breachedaccount",
+                    "range",
+                    ":prefix"
+                  ],
+                  "host": [
+                    "{{breachedaccount-range-prefix-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prefix",
+                      "description": "(Required) First 6 characters of the SHA-1 hash of the email address to search for (hexadecimal, not case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "hibp-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) User agent string identifying the consuming application. Required on all documented requests, including unauthenticated endpoints; missing user agents may receive HTTP 403 responses.",
+                    "key": "user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"hashSuffix\": \"D95E127BD0C0455D0CF3CEE15022BA020D\",\n    \"websites\": [\n      \"Adobe\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f861b1f-43ab-43f0-b32f-6c6410191f90",
+              "name": "Bad request — the prefix was not a 6-character hexadecimal string.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "breachedaccount",
+                    "range",
+                    ":prefix"
+                  ],
+                  "host": [
+                    "{{breachedaccount-range-prefix-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prefix",
+                      "description": "(Required) First 6 characters of the SHA-1 hash of the email address to search for (hexadecimal, not case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "hibp-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) User agent string identifying the consuming application. Required on all documented requests, including unauthenticated endpoints; missing user agents may receive HTTP 403 responses.",
+                    "key": "user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Invalid hex prefix",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "abc5e9d1-803c-4033-9e45-9780adfd029e",
+              "name": "Unauthorized — the API key provided was not valid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "breachedaccount",
+                    "range",
+                    ":prefix"
+                  ],
+                  "host": [
+                    "{{breachedaccount-range-prefix-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prefix",
+                      "description": "(Required) First 6 characters of the SHA-1 hash of the email address to search for (hexadecimal, not case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "hibp-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) User agent string identifying the consuming application. Required on all documented requests, including unauthenticated endpoints; missing user agents may receive HTTP 403 responses.",
+                    "key": "user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 401,\n  \"message\": \"Access denied due to missing hibp-api-key.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aefebb39-a1e4-465f-bcca-66cc28e269dc",
+              "name": "Forbidden — no user agent has been specified in the request, or the current subscription does not include access to the breached-account k-anonymity API.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "breachedaccount",
+                    "range",
+                    ":prefix"
+                  ],
+                  "host": [
+                    "{{breachedaccount-range-prefix-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prefix",
+                      "description": "(Required) First 6 characters of the SHA-1 hash of the email address to search for (hexadecimal, not case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "hibp-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) User agent string identifying the consuming application. Required on all documented requests, including unauthenticated endpoints; missing user agents may receive HTTP 403 responses.",
+                    "key": "user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "API request must include a user agent",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "997666de-5caf-4e8b-bba1-b01af83fec20",
+              "name": "Not found — no public breached-account hashes remain for the requested range after filtering.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "breachedaccount",
+                    "range",
+                    ":prefix"
+                  ],
+                  "host": [
+                    "{{breachedaccount-range-prefix-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prefix",
+                      "description": "(Required) First 6 characters of the SHA-1 hash of the email address to search for (hexadecimal, not case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "hibp-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) User agent string identifying the consuming application. Required on all documented requests, including unauthenticated endpoints; missing user agents may receive HTTP 403 responses.",
+                    "key": "user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "There are no hashes beginning with that prefix",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f056f572-0222-4259-bb50-818ae80cca9f",
+              "name": "Too many requests — the rate limit has been exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "breachedaccount",
+                    "range",
+                    ":prefix"
+                  ],
+                  "host": [
+                    "{{breachedaccount-range-prefix-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prefix",
+                      "description": "(Required) First 6 characters of the SHA-1 hash of the email address to search for (hexadecimal, not case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "hibp-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) User agent string identifying the consuming application. Required on all documented requests, including unauthenticated endpoints; missing user agents may receive HTTP 403 responses.",
+                    "key": "user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds until retry (rounded up to the next whole second)",
+                  "key": "Retry-After",
+                  "value": "8482"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 429,\n  \"message\": \"Rate limit is exceeded. Try again in 2 seconds.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "37ed9441-7c91-4a64-b610-9661001fa1fd",
+              "name": "Service unavailable — usually returned by Cloudflare if the underlying service is not available",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "breachedaccount",
+                    "range",
+                    ":prefix"
+                  ],
+                  "host": [
+                    "{{breachedaccount-range-prefix-Url}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prefix",
+                      "description": "(Required) First 6 characters of the SHA-1 hash of the email address to search for (hexadecimal, not case-sensitive)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "hibp-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) User agent string identifying the consuming application. Required on all documented requests, including unauthenticated endpoints; missing user agents may receive HTTP 403 responses.",
+                    "key": "user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 2304,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://haveibeenpwned.com/api/v3",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://haveibeenpwned.com/api/v3",
+      "key": "breachedaccount-account-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://haveibeenpwned.com/api/v3",
+      "key": "breachedaccount-range-prefix-Url"
+    }
+  ],
+  "info": {
+    "_postman_id": "1bc44c1b-bcd6-4b37-aaff-4ce50e889ec5",
+    "name": "Have I Been Pwned API v3 Breach Breachedaccount API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Version 3 of the Have I Been Pwned API. Authenticated APIs for breaches by account, pastes, domain search, domain verification, stealer logs, and subscription status require both the hibp-api-key and user-agent headers. Availability varies by subscription tier and is noted per operation. The Pwned Passwords range API is free and does not require authentication.",
+      "type": "text/plain"
+    }
+  }
+}

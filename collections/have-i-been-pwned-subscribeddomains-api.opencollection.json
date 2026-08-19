@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Have I Been Pwned API v3 Breach Subscribeddomains API",
+    "version": "3.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Subscribeddomains",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all subscribed domains for API key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://haveibeenpwned.com/api/v3/subscribeddomains",
+            "headers": [
+              {
+                "name": "user-agent",
+                "value": ""
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "hibp-api-key",
+              "value": "{{hibp-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Available on Core and Pro subscriptions. Returns the domains associated with the supplied hibp-api-key after they have been added to the domain search dashboard and verified."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

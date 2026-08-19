@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Have I Been Pwned API v3 Breached Accounts Data Classes API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "hibp-api-key",
+      "value": "{{hibp-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Data Classes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get All Data Classes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://haveibeenpwned.com/api/v3/dataclasses"
+          },
+          "docs": "Returns the alphabetically ordered list of data classes that may be exposed in breaches."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
