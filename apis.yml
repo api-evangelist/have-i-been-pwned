@@ -116,6 +116,8 @@ apis:
   humanURL: https://haveibeenpwned.com/API/v3
   baseURL: https://haveibeenpwned.com/api/v3
   tags:
+  - DataClasses
+  tags_raw:
   - Dataclasses
   properties:
   - type: OpenAPI
@@ -126,6 +128,8 @@ apis:
   humanURL: https://haveibeenpwned.com/API/v3
   baseURL: https://haveibeenpwned.com/api/v3
   tags:
+  - Domain Verification
+  tags_raw:
   - Domainverification
   properties:
   - type: OpenAPI
