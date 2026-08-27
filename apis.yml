@@ -34,10 +34,11 @@ specificationVersion: '0.23'
 apis:
 - aid: have-i-been-pwned:api-v3
   name: Have I Been Pwned API v3
-  description: REST API for searching breached accounts, pastes, breach metadata, domain breach data,
-    and stealer log entries. Authentication requires an hibp-api-key header (32-character key) along with
-    a descriptive user-agent header. Most endpoints require a paid subscription; rate limits range from
-    600 to 100,000 requests per minute depending on tier.
+  description: >-
+    REST API for searching breached accounts, pastes, breach metadata, domain breach data, and stealer
+    log entries. Authentication requires an hibp-api-key header (32-character key) along with a descriptive
+    user-agent header. Most endpoints require a paid subscription; rate limits range from 600 to 100,000
+    requests per minute depending on tier.
   humanURL: https://haveibeenpwned.com/API/v3
   baseURL: https://haveibeenpwned.com/api/v3
   tags:
@@ -55,9 +56,10 @@ apis:
     url: https://haveibeenpwned.com/API/Key
 - aid: have-i-been-pwned:pwned-passwords
   name: Pwned Passwords API
-  description: Free, unauthenticated, k-anonymity-based API to check whether a password hash appears in
-    the 800+ million record Pwned Passwords dataset. Clients submit the first five characters of a SHA-1
-    hash and receive a list of matching suffixes with counts. No rate limit and no attribution required.
+  description: >-
+    Free, unauthenticated, k-anonymity-based API to check whether a password hash appears in the 800+
+    million record Pwned Passwords dataset. Clients submit the first five characters of a SHA-1 hash and
+    receive a list of matching suffixes with counts. No rate limit and no attribution required.
   humanURL: https://haveibeenpwned.com/API/v3#PwnedPasswords
   baseURL: https://api.pwnedpasswords.com
   tags:
@@ -124,7 +126,8 @@ apis:
     url: openapi/have-i-been-pwned-dataclasses-api-openapi.yml
 - aid: have-i-been-pwned:have-i-been-pwned-domainverification-api
   name: Have I Been Pwned Domainverification API
-  description: The Domainverification API from Have I Been Pwned — 3 operation(s) for domainverification.
+  description: >-
+    The Domainverification API from Have I Been Pwned — 3 operation(s) for domainverification.
   humanURL: https://haveibeenpwned.com/API/v3
   baseURL: https://haveibeenpwned.com/api/v3
   tags:
@@ -166,7 +169,8 @@ apis:
     url: openapi/have-i-been-pwned-range-api-openapi.yml
 - aid: have-i-been-pwned:have-i-been-pwned-stealerlogsbyemail-api
   name: Have I Been Pwned Stealerlogsbyemail API
-  description: The Stealerlogsbyemail API from Have I Been Pwned — 1 operation(s) for stealerlogsbyemail.
+  description: >-
+    The Stealerlogsbyemail API from Have I Been Pwned — 1 operation(s) for stealerlogsbyemail.
   humanURL: https://haveibeenpwned.com/API/v3
   baseURL: https://haveibeenpwned.com/api/v3
   tags:
@@ -176,7 +180,8 @@ apis:
     url: openapi/have-i-been-pwned-stealerlogsbyemail-api-openapi.yml
 - aid: have-i-been-pwned:have-i-been-pwned-stealerlogsbyemaildomain-api
   name: Have I Been Pwned Stealerlogsbyemaildomain API
-  description: The Stealerlogsbyemaildomain API from Have I Been Pwned — 1 operation(s) for stealerlogsbyemaildomain.
+  description: >-
+    The Stealerlogsbyemaildomain API from Have I Been Pwned — 1 operation(s) for stealerlogsbyemaildomain.
   humanURL: https://haveibeenpwned.com/API/v3
   baseURL: https://haveibeenpwned.com/api/v3
   tags:
@@ -186,7 +191,8 @@ apis:
     url: openapi/have-i-been-pwned-stealerlogsbyemaildomain-api-openapi.yml
 - aid: have-i-been-pwned:have-i-been-pwned-stealerlogsbywebsitedomain-api
   name: Have I Been Pwned Stealerlogsbywebsitedomain API
-  description: The Stealerlogsbywebsitedomain API from Have I Been Pwned — 1 operation(s) for stealerlogsbywebsitedomain.
+  description: >-
+    The Stealerlogsbywebsitedomain API from Have I Been Pwned — 1 operation(s) for stealerlogsbywebsitedomain.
   humanURL: https://haveibeenpwned.com/API/v3
   baseURL: https://haveibeenpwned.com/api/v3
   tags:
@@ -214,6 +220,66 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/have-i-been-pwned-subscription-api-openapi.yml
+- aid: have-i-been-pwned:have-i-been-pwned-breached-accounts-api
+  name: Have I Been Pwned Breached Accounts API
+  description: Lookup breaches affecting an email address.
+  humanURL: https://haveibeenpwned.com/API/v3
+  baseURL: https://haveibeenpwned.com/api/v3
+  tags:
+  - Breached Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/have-i-been-pwned-breached-accounts-api-openapi.yml
+- aid: have-i-been-pwned:have-i-been-pwned-data-classes-api
+  name: Have I Been Pwned Data Classes API
+  description: Enumerate classes of data exposed across breaches.
+  humanURL: https://haveibeenpwned.com/API/v3
+  baseURL: https://haveibeenpwned.com/api/v3
+  tags:
+  - Data Classes
+  properties:
+  - type: OpenAPI
+    url: openapi/have-i-been-pwned-data-classes-api-openapi.yml
+- aid: have-i-been-pwned:have-i-been-pwned-domain-search-api
+  name: Have I Been Pwned Domain Search API
+  description: Verify and search domains you control.
+  humanURL: https://haveibeenpwned.com/API/v3
+  baseURL: https://haveibeenpwned.com/api/v3
+  tags:
+  - Domain Search
+  properties:
+  - type: OpenAPI
+    url: openapi/have-i-been-pwned-domain-search-api-openapi.yml
+- aid: have-i-been-pwned:have-i-been-pwned-pastes-api
+  name: Have I Been Pwned Pastes API
+  description: Lookup pastes referencing an email address.
+  humanURL: https://haveibeenpwned.com/API/v3
+  baseURL: https://haveibeenpwned.com/api/v3
+  tags:
+  - Pastes
+  properties:
+  - type: OpenAPI
+    url: openapi/have-i-been-pwned-pastes-api-openapi.yml
+- aid: have-i-been-pwned:have-i-been-pwned-range-search-api
+  name: Have I Been Pwned Range Search API
+  description: K-anonymity range search for password hashes.
+  humanURL: https://haveibeenpwned.com/API/v3
+  baseURL: https://haveibeenpwned.com/api/v3
+  tags:
+  - Range Search
+  properties:
+  - type: OpenAPI
+    url: openapi/have-i-been-pwned-range-search-api-openapi.yml
+- aid: have-i-been-pwned:have-i-been-pwned-stealer-logs-api
+  name: Have I Been Pwned Stealer Logs API
+  description: Search infostealer malware corpora by email or domain.
+  humanURL: https://haveibeenpwned.com/API/v3
+  baseURL: https://haveibeenpwned.com/api/v3
+  tags:
+  - Stealer Logs
+  properties:
+  - type: OpenAPI
+    url: openapi/have-i-been-pwned-stealer-logs-api-openapi.yml
 common:
 - type: AgenticAccess
   url: agentic-access/have-i-been-pwned-agentic-access.yml
