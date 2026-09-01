@@ -130,7 +130,7 @@ apis:
   humanURL: https://haveibeenpwned.com/API/v3
   baseURL: https://haveibeenpwned.com/api/v3
   tags:
-  - Dataclasses
+  - DataClasses
   tags_raw:
   - Dataclasses
   properties:
@@ -143,7 +143,7 @@ apis:
   humanURL: https://haveibeenpwned.com/API/v3
   baseURL: https://haveibeenpwned.com/api/v3
   tags:
-  - Domainverification
+  - Domain Verification
   tags_raw:
   - Domainverification
   properties:
