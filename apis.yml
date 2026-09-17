@@ -126,18 +126,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/have-i-been-pwned-breaches-api-openapi.yml
-- aid: have-i-been-pwned:have-i-been-pwned-dataclasses-api
-  name: Have I Been Pwned Dataclasses API
-  description: The Dataclasses API from Have I Been Pwned — 1 operation(s) for dataclasses.
-  humanURL: https://haveibeenpwned.com/API/v3
-  baseURL: https://haveibeenpwned.com/api/v3
-  tags:
-  - DataClasses
-  tags_raw:
-  - Dataclasses
-  properties:
-  - type: OpenAPI
-    url: openapi/have-i-been-pwned-dataclasses-api-openapi.yml
 - aid: have-i-been-pwned:have-i-been-pwned-domainverification-api
   name: Have I Been Pwned Domainverification API
   description: >-
