@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Have I Been Pwned API v3 Breach Subscribeddomains API
+  title: Have I Been Pwned API v3 Subscribeddomains API
   description: Version 3 of the Have I Been Pwned API. Authenticated APIs for breaches by account, pastes, domain search, domain verification, stealer logs, and subscription status require both the hibp-api-key and user-agent headers. Availability varies by subscription tier and is noted per operation. The Pwned Passwords range API is free and does not require authentication.
   version: 3.0.0
   license:
@@ -50,41 +50,10 @@ paths:
       - Pro
       tags:
       - Subscribeddomains
+      operationId: getSubscribeddomains
+      x-operation-id-source: derived
 components:
-  parameters:
-    UserAgent:
-      name: user-agent
-      in: header
-      required: true
-      description: User agent string identifying the consuming application. Required on all documented requests, including unauthenticated endpoints; missing user agents may receive HTTP 403 responses.
-      schema:
-        type: string
   schemas:
-    SubscribedDomain:
-      type: object
-      properties:
-        DomainName:
-          type: string
-          description: The full domain name that has been successfully verified.
-        PwnCount:
-          type: integer
-          nullable: true
-          description: The total number of breached email addresses found on the domain at last search (will be null if no searches yet performed).
-        PwnCountExcludingSpamLists:
-          type: integer
-          nullable: true
-          description: The number of breached email addresses found on the domain at last search, excluding any breaches flagged as a spam list (will be null if no searches yet performed).
-        PwnCountExcludingSpamListsAtLastSubscriptionRenewal:
-          type: integer
-          nullable: true
-          description: The total number of breached email addresses found on the domain when the current subscription was taken out (will be null if no searches yet performed). This number ensures the domain remains searchable throughout the subscription period even if the volume of breached accounts grows beyond the subscription's scope.
-        NextSubscriptionRenewal:
-          type: string
-          format: date-time
-          nullable: true
-          description: The date and time the current subscription ends in ISO 8601 format. The PwnCountExcludingSpamListsAtLastSubscriptionRenewal value is locked in until this time (will be null if there have been no subscriptions).
-      required:
-      - DomainName
     Error:
       type: object
       properties:
@@ -96,6 +65,43 @@ components:
       - statusCode
       - message
       description: Standard error response returned by most authenticated HIBP APIs.
+    SubscribedDomain:
+      type: object
+      properties:
+        DomainName:
+          type: string
+          description: The full domain name that has been successfully verified.
+        PwnCount:
+          type:
+          - integer
+          - 'null'
+          description: The total number of breached email addresses found on the domain at last search (will be null if no searches yet performed).
+        PwnCountExcludingSpamLists:
+          type:
+          - integer
+          - 'null'
+          description: The number of breached email addresses found on the domain at last search, excluding any breaches flagged as a spam list (will be null if no searches yet performed).
+        PwnCountExcludingSpamListsAtLastSubscriptionRenewal:
+          type:
+          - integer
+          - 'null'
+          description: The total number of breached email addresses found on the domain when the current subscription was taken out (will be null if no searches yet performed). This number ensures the domain remains searchable throughout the subscription period even if the volume of breached accounts grows beyond the subscription's scope.
+        NextSubscriptionRenewal:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The date and time the current subscription ends in ISO 8601 format. The PwnCountExcludingSpamListsAtLastSubscriptionRenewal value is locked in until this time (will be null if there have been no subscriptions).
+      required:
+      - DomainName
+  parameters:
+    UserAgent:
+      name: user-agent
+      in: header
+      required: true
+      description: User agent string identifying the consuming application. Required on all documented requests, including unauthenticated endpoints; missing user agents may receive HTTP 403 responses.
+      schema:
+        type: string
   securitySchemes:
     HibpApiKey:
       type: apiKey

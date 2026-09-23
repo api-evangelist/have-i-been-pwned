@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Have I Been Pwned API v3 Breach Domainverification API
+  title: Have I Been Pwned API v3 Domainverification API
   description: Version 3 of the Have I Been Pwned API. Authenticated APIs for breaches by account, pastes, domain search, domain verification, stealer logs, and subscription status require both the hibp-api-key and user-agent headers. Availability varies by subscription tier and is noted per operation. The Pwned Passwords range API is free and does not require authentication.
   version: 3.0.0
   license:
@@ -77,6 +77,8 @@ paths:
                     message: Your subscription does not have permission to add domains. Please contact support if you believe this is an error.
       tags:
       - Domainverification
+      operationId: postDomainverificationGeneratednstoken
+      x-operation-id-source: derived
   /domainverification/verifydnstoken:
     servers:
     - url: https://haveibeenpwned.com/api/v3
@@ -144,6 +146,8 @@ paths:
                     message: Expected a TXT record of hibp-verify=dweb_abc123xyz but instead found hibp-verify=dweb_othercode
       tags:
       - Domainverification
+      operationId: postDomainverificationVerifydnstoken
+      x-operation-id-source: derived
   /domainverification/sendemail:
     servers:
     - url: https://haveibeenpwned.com/api/v3
@@ -202,16 +206,10 @@ paths:
                     message: Your subscription does not have permission to add domains. Please contact support if you believe this is an error.
       tags:
       - Domainverification
+      operationId: postDomainverificationSendemail
+      x-operation-id-source: derived
 components:
   schemas:
-    DomainVerificationRequest:
-      type: object
-      properties:
-        DomainName:
-          type: string
-          description: Domain name to generate or verify a domain-verification token for.
-      required:
-      - DomainName
     DomainVerificationDnsTokenResponse:
       type: object
       properties:
@@ -232,14 +230,6 @@ components:
       required:
       - DomainName
       - EmailAlias
-    MessageOnlyError:
-      type: object
-      description: Simple error response used by the domain-verification APIs.
-      properties:
-        message:
-          type: string
-      required:
-      - message
     Error:
       type: object
       properties:
@@ -251,6 +241,22 @@ components:
       - statusCode
       - message
       description: Standard error response returned by most authenticated HIBP APIs.
+    DomainVerificationRequest:
+      type: object
+      properties:
+        DomainName:
+          type: string
+          description: Domain name to generate or verify a domain-verification token for.
+      required:
+      - DomainName
+    MessageOnlyError:
+      type: object
+      description: Simple error response used by the domain-verification APIs.
+      properties:
+        message:
+          type: string
+      required:
+      - message
   parameters:
     UserAgent:
       name: user-agent

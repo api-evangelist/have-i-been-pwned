@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Have I Been Pwned API v3 Breach Range API
+  title: Have I Been Pwned API v3 Range API
   description: Version 3 of the Have I Been Pwned API. Authenticated APIs for breaches by account, pastes, domain search, domain verification, stealer logs, and subscription status require both the hibp-api-key and user-agent headers. Availability varies by subscription tier and is noted per operation. The Pwned Passwords range API is free and does not require authentication.
   version: 3.0.0
   license:
@@ -64,15 +64,10 @@ paths:
       security: []
       tags:
       - Range
+      operationId: getRangeByPrefix
+      x-operation-id-source: derived
 components:
   parameters:
-    AddPadding:
-      name: Add-Padding
-      in: header
-      required: false
-      description: Adds random padding to Pwned Passwords responses (discard padded entries with count of 0).
-      schema:
-        type: boolean
     UserAgent:
       name: user-agent
       in: header
@@ -80,6 +75,13 @@ components:
       description: User agent string identifying the consuming application. Required on all documented requests, including unauthenticated endpoints; missing user agents may receive HTTP 403 responses.
       schema:
         type: string
+    AddPadding:
+      name: Add-Padding
+      in: header
+      required: false
+      description: Adds random padding to Pwned Passwords responses (discard padded entries with count of 0).
+      schema:
+        type: boolean
   securitySchemes:
     HibpApiKey:
       type: apiKey

@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Have I Been Pwned API v3 Breach Latestbreach API
+  title: Have I Been Pwned API v3 Latestbreach API
   description: Version 3 of the Have I Been Pwned API. Authenticated APIs for breaches by account, pastes, domain search, domain verification, stealer logs, and subscription status require both the hibp-api-key and user-agent headers. Availability varies by subscription tier and is noted per operation. The Pwned Passwords range API is free and does not require authentication.
   version: 3.0.0
   license:
@@ -37,8 +37,21 @@ paths:
                 $ref: '#/components/schemas/Error'
       tags:
       - Latestbreach
+      operationId: getLatestbreach
+      x-operation-id-source: derived
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+        message:
+          type: string
+      required:
+      - statusCode
+      - message
+      description: Standard error response returned by most authenticated HIBP APIs.
     Breach:
       type: object
       properties:
@@ -103,8 +116,9 @@ components:
           format: uri
           description: A URI that specifies where a logo for the breached service can be found. Logos are always in PNG format.
         Attribution:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Sometimes requested by the party that provides the data to HIBP.
       required:
       - Name
@@ -125,17 +139,6 @@ components:
       - IsSubscriptionFree
       - IsStealerLog
       - LogoPath
-    Error:
-      type: object
-      properties:
-        statusCode:
-          type: integer
-        message:
-          type: string
-      required:
-      - statusCode
-      - message
-      description: Standard error response returned by most authenticated HIBP APIs.
   parameters:
     UserAgent:
       name: user-agent

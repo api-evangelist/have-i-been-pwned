@@ -1,15 +1,13 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Have I Been Pwned API v3 Breached Accounts Domain Search API
+  title: Have I Been Pwned API v3 Domain Search API
   description: 'The Have I Been Pwned (HIBP) API allows the list of pwned accounts (email addresses, domains,
 
     passwords, and stealer log entries) to be quickly searched via REST. Authenticated endpoints
 
     require an `hibp-api-key` header. All requests must send a `user-agent` header that accurately
 
-    identifies the consuming application. Subscriptions range from Pwned 1 to Pwned 5.
-
-    '
+    identifies the consuming application. Subscriptions range from Pwned 1 to Pwned 5.'
   version: 3.0.0
   contact:
     name: Have I Been Pwned
@@ -143,30 +141,12 @@ components:
       required:
       - DomainName
       - EmailAlias
-    SubscribedDomain:
+    DomainVerificationRequest:
       type: object
-      description: A domain monitored by the calling subscription.
       properties:
         DomainName:
           type: string
-          description: Fully qualified domain name.
-        PwnCount:
-          type: integer
-          nullable: true
-          description: Total pwned email count on the domain.
-        PwnCountExcludingSpamLists:
-          type: integer
-          nullable: true
-          description: Pwned email count excluding spam lists.
-        PwnCountExcludingSpamListsAtLastSubscriptionRenewal:
-          type: integer
-          nullable: true
-          description: Pwned count excluding spam lists at the last renewal.
-        NextSubscriptionRenewal:
-          type: string
-          format: date-time
-          nullable: true
-          description: Next renewal date for the domain subscription.
+          description: Fully qualified domain to verify.
       required:
       - DomainName
     Error:
@@ -180,23 +160,37 @@ components:
       required:
       - statusCode
       - message
-    DomainVerificationRequest:
+    SubscribedDomain:
       type: object
+      description: A domain monitored by the calling subscription.
       properties:
         DomainName:
           type: string
-          description: Fully qualified domain to verify.
+          description: Fully qualified domain name.
+        PwnCount:
+          type:
+          - integer
+          - 'null'
+          description: Total pwned email count on the domain.
+        PwnCountExcludingSpamLists:
+          type:
+          - integer
+          - 'null'
+          description: Pwned email count excluding spam lists.
+        PwnCountExcludingSpamListsAtLastSubscriptionRenewal:
+          type:
+          - integer
+          - 'null'
+          description: Pwned count excluding spam lists at the last renewal.
+        NextSubscriptionRenewal:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Next renewal date for the domain subscription.
       required:
       - DomainName
   responses:
-    Unauthorized:
-      description: The `hibp-api-key` header is missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: No record matched the supplied identifier.
     Forbidden:
       description: 'The request is forbidden. Common causes include a missing `user-agent` header,
 
@@ -207,6 +201,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: The `hibp-api-key` header is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: No record matched the supplied identifier.
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

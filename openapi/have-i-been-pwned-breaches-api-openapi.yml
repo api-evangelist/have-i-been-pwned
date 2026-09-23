@@ -1,11 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Have I Been Pwned API v3 Breach Breaches API
-  description: Version 3 of the Have I Been Pwned API. Authenticated APIs for breaches by account, pastes, domain search, domain verification, stealer logs, and subscription status require both the hibp-api-key and user-agent headers. Availability varies by subscription tier and is noted per operation. The Pwned Passwords range API is free and does not require authentication.
+  title: Have I Been Pwned Breaches API
   version: 3.0.0
-  license:
-    name: Creative Commons Attribution 4.0 International
-    url: https://creativecommons.org/licenses/by/4.0/
+  description: 'Operations tagged Breaches across 2 of this provider''s published API definitions: have-i-been-pwned-openapi.json, hibp-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://haveibeenpwned.com/api/v3
   description: HIBP API v3 server
@@ -49,8 +46,66 @@ paths:
                 $ref: '#/components/schemas/Error'
       tags:
       - Breaches
+      operationId: getBreaches
+      x-operation-id-source: derived
+  /breach/{name}:
+    get:
+      tags:
+      - Breaches
+      summary: Get A Single Breach By Name
+      description: Returns the metadata for a single breach identified by its stable Pascal-cased name.
+      operationId: getBreachByName
+      security: []
+      parameters:
+      - name: name
+        in: path
+        required: true
+        description: Pascal-cased stable name of the breach (e.g. `Adobe`).
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The breach record.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Breach_2'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    servers:
+    - url: https://haveibeenpwned.com/api/v3
+      description: HIBP Production API
+  /latestbreach:
+    get:
+      tags:
+      - Breaches
+      summary: Get The Most Recently Added Breach
+      description: Returns the breach most recently added to HIBP.
+      operationId: getLatestBreach
+      security: []
+      responses:
+        '200':
+          description: The most recently added breach.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Breach_2'
+    servers:
+    - url: https://haveibeenpwned.com/api/v3
+      description: HIBP Production API
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+        message:
+          type: string
+      required:
+      - statusCode
+      - message
+      description: Standard error response returned by most authenticated HIBP APIs.
     Breach:
       type: object
       properties:
@@ -115,8 +170,9 @@ components:
           format: uri
           description: A URI that specifies where a logo for the breached service can be found. Logos are always in PNG format.
         Attribution:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Sometimes requested by the party that provides the data to HIBP.
       required:
       - Name
@@ -137,17 +193,81 @@ components:
       - IsSubscriptionFree
       - IsStealerLog
       - LogoPath
-    Error:
+    Breach_2:
       type: object
+      description: Full metadata record describing a breach in HIBP.
       properties:
-        statusCode:
-          type: integer
-        message:
+        Name:
           type: string
+          description: Stable Pascal-cased identifier; never changes.
+        Title:
+          type: string
+          description: Descriptive breach title suitable for UI display.
+        Domain:
+          type: string
+          description: Primary website domain associated with the breach.
+        BreachDate:
+          type: string
+          format: date
+          description: Approximate date the breach occurred (ISO 8601).
+        AddedDate:
+          type: string
+          format: date-time
+          description: When the breach was loaded into HIBP.
+        ModifiedDate:
+          type: string
+          format: date-time
+          description: Last modification timestamp; always greater than or equal to AddedDate.
+        PwnCount:
+          type: integer
+          description: Approximate number of email addresses loaded for the breach.
+        Description:
+          type: string
+          description: HTML-formatted description of the breach.
+        DataClasses:
+          type: array
+          items:
+            type: string
+          description: Alphabetically ordered list of data classes exposed in the breach.
+        IsVerified:
+          type: boolean
+          description: Whether the breach has been verified.
+        IsFabricated:
+          type: boolean
+          description: Whether the breach data is likely fabricated.
+        IsSensitive:
+          type: boolean
+          description: Whether the breach is flagged sensitive (not returned in public APIs).
+        IsRetired:
+          type: boolean
+          description: Whether the breach has been retired from public listings.
+        IsSpamList:
+          type: boolean
+          description: Whether the source is a spam list rather than a credential breach.
+        IsMalware:
+          type: boolean
+          description: Whether the breach originates from malware activity.
+        IsStealerLog:
+          type: boolean
+          description: Whether the breach is sourced from stealer logs.
+        IsSubscriptionFree:
+          type: boolean
+          description: Whether the breach is queryable without an HIBP subscription.
+        LogoPath:
+          type: string
+          format: uri
+          description: URI to the breach logo PNG.
+        Attribution:
+          type: string
+          description: Optional human-readable attribution for the breach source.
       required:
-      - statusCode
-      - message
-      description: Standard error response returned by most authenticated HIBP APIs.
+      - Name
+      - Title
+      - Domain
+      - BreachDate
+      - AddedDate
+      - ModifiedDate
+      - PwnCount
   parameters:
     UserAgent:
       name: user-agent
@@ -156,12 +276,27 @@ components:
       description: User agent string identifying the consuming application. Required on all documented requests, including unauthenticated endpoints; missing user agents may receive HTTP 403 responses.
       schema:
         type: string
+  responses:
+    NotFound:
+      description: No record matched the supplied identifier.
   securitySchemes:
     HibpApiKey:
       type: apiKey
       in: header
       name: hibp-api-key
       description: HIBP API key passed in the hibp-api-key header. Paid APIs require a 32-character hexadecimal value. On supported test-only endpoints, any 32-character hexadecimal value can be used as a test key for the hibp-integration-tests.com domain.
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: hibp-api-key
+      description: '32-character hexadecimal API key issued at https://haveibeenpwned.com/API/Key.
+
+        Required for all account, paste, stealer log, domain search, and subscription endpoints.
+
+        '
 externalDocs:
   description: Full API documentation and acceptable use policy
   url: https://haveibeenpwned.com/API/v3
+x-refined-from:
+- have-i-been-pwned-openapi.json
+- hibp-openapi.yml

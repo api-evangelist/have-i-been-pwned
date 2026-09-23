@@ -1,15 +1,13 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Have I Been Pwned API v3 Breached Accounts Pastes API
+  title: Have I Been Pwned API v3 Pastes API
   description: 'The Have I Been Pwned (HIBP) API allows the list of pwned accounts (email addresses, domains,
 
     passwords, and stealer log entries) to be quickly searched via REST. Authenticated endpoints
 
     require an `hibp-api-key` header. All requests must send a `user-agent` header that accurately
 
-    identifies the consuming application. Subscriptions range from Pwned 1 to Pwned 5.
-
-    '
+    identifies the consuming application. Subscriptions range from Pwned 1 to Pwned 5.'
   version: 3.0.0
   contact:
     name: Have I Been Pwned
@@ -53,13 +51,65 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 components:
+  schemas:
+    Error:
+      type: object
+      description: Standard HIBP error payload.
+      properties:
+        statusCode:
+          type: integer
+        message:
+          type: string
+      required:
+      - statusCode
+      - message
+    Paste:
+      type: object
+      description: A paste referencing an email address.
+      properties:
+        Source:
+          type: string
+          description: Paste source service (e.g. Pastebin, Pastie, Slexy, Ghostbin).
+        Id:
+          type: string
+          description: Source-specific identifier of the paste.
+        Title:
+          type:
+          - string
+          - 'null'
+          description: Title of the paste, if available.
+        Date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the paste was published.
+        EmailCount:
+          type: integer
+          description: Number of email addresses found in the paste.
+      required:
+      - Source
+      - Id
+      - EmailCount
   responses:
+    Forbidden:
+      description: 'The request is forbidden. Common causes include a missing `user-agent` header,
+
+        querying an unverified domain, or a feature not included in the calling subscription.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     Unauthorized:
       description: The `hibp-api-key` header is missing or invalid.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    NotFound:
+      description: No record matched the supplied identifier.
     TooManyRequests:
       description: 'Rate limit exceeded. Inspect the `retry-after` header to determine when to retry.
 
@@ -73,56 +123,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: No record matched the supplied identifier.
-    Forbidden:
-      description: 'The request is forbidden. Common causes include a missing `user-agent` header,
-
-        querying an unverified domain, or a feature not included in the calling subscription.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-  schemas:
-    Paste:
-      type: object
-      description: A paste referencing an email address.
-      properties:
-        Source:
-          type: string
-          description: Paste source service (e.g. Pastebin, Pastie, Slexy, Ghostbin).
-        Id:
-          type: string
-          description: Source-specific identifier of the paste.
-        Title:
-          type: string
-          nullable: true
-          description: Title of the paste, if available.
-        Date:
-          type: string
-          format: date-time
-          nullable: true
-          description: When the paste was published.
-        EmailCount:
-          type: integer
-          description: Number of email addresses found in the paste.
-      required:
-      - Source
-      - Id
-      - EmailCount
-    Error:
-      type: object
-      description: Standard HIBP error payload.
-      properties:
-        statusCode:
-          type: integer
-        message:
-          type: string
-      required:
-      - statusCode
-      - message
   parameters:
     AccountPath:
       name: account

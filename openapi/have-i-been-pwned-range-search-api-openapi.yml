@@ -1,27 +1,23 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Have I Been Pwned API v3 Breached Accounts Range Search API
-  description: 'The Have I Been Pwned (HIBP) API allows the list of pwned accounts (email addresses, domains,
+  title: Pwned Passwords Range Search API
+  description: 'Pwned Passwords is a free k-anonymity-based lookup service that exposes whether a password
 
-    passwords, and stealer log entries) to be quickly searched via REST. Authenticated endpoints
+    appears in any of the public credential corpora ingested by Have I Been Pwned. Clients
 
-    require an `hibp-api-key` header. All requests must send a `user-agent` header that accurately
+    submit the first five characters of the SHA-1 (or NTLM) hash of a password and receive
 
-    identifies the consuming application. Subscriptions range from Pwned 1 to Pwned 5.
-
-    '
-  version: 3.0.0
+    a list of matching hash suffixes with their breach counts. No authentication is required.'
+  version: 2.0.0
   contact:
-    name: Have I Been Pwned
-    url: https://haveibeenpwned.com/API/v3
+    name: Pwned Passwords
+    url: https://haveibeenpwned.com/API/v3#PwnedPasswords
   license:
     name: Creative Commons Attribution 4.0
     url: https://creativecommons.org/licenses/by/4.0/
 servers:
-- url: https://haveibeenpwned.com/api/v3
-  description: HIBP Production API
-security:
-- ApiKeyAuth: []
+- url: https://api.pwnedpasswords.com
+  description: Pwned Passwords k-anonymity API
 tags:
 - name: Range Search
   description: K-anonymity range search for password hashes.
@@ -33,9 +29,7 @@ paths:
       summary: Search By Hash Range
       description: 'Returns suffixes of all SHA-1 (or NTLM) hashes that begin with the supplied 5-character
 
-        prefix, alongside the number of times each hash was observed in breaches.
-
-        '
+        prefix, alongside the number of times each hash was observed in breaches.'
       operationId: searchPasswordRange
       parameters:
       - name: hashPrefix
@@ -77,14 +71,3 @@ paths:
                   00D4F6E8FA6EECAD2A3AA415EEC418D38EC:2
 
                   '
-components:
-  securitySchemes:
-    ApiKeyAuth:
-      type: apiKey
-      in: header
-      name: hibp-api-key
-      description: '32-character hexadecimal API key issued at https://haveibeenpwned.com/API/Key.
-
-        Required for all account, paste, stealer log, domain search, and subscription endpoints.
-
-        '

@@ -1,15 +1,13 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Have I Been Pwned API v3 Breached Accounts Data Classes API
+  title: Have I Been Pwned API v3 Data Classes API
   description: 'The Have I Been Pwned (HIBP) API allows the list of pwned accounts (email addresses, domains,
 
     passwords, and stealer log entries) to be quickly searched via REST. Authenticated endpoints
 
     require an `hibp-api-key` header. All requests must send a `user-agent` header that accurately
 
-    identifies the consuming application. Subscriptions range from Pwned 1 to Pwned 5.
-
-    '
+    identifies the consuming application. Subscriptions range from Pwned 1 to Pwned 5.'
   version: 3.0.0
   contact:
     name: Have I Been Pwned
@@ -43,6 +41,8 @@ paths:
                 type: array
                 items:
                   type: string
+    servers:
+    - url: https://haveibeenpwned.com/api/v3
 components:
   securitySchemes:
     ApiKeyAuth:
@@ -54,3 +54,28 @@ components:
         Required for all account, paste, stealer log, domain search, and subscription endpoints.
 
         '
+    HibpApiKey:
+      type: apiKey
+      in: header
+      name: hibp-api-key
+      description: HIBP API key passed in the hibp-api-key header. Paid APIs require a 32-character hexadecimal value. On supported test-only endpoints, any 32-character hexadecimal value can be used as a test key for the hibp-integration-tests.com domain.
+  schemas:
+    Error:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+        message:
+          type: string
+      required:
+      - statusCode
+      - message
+      description: Standard error response returned by most authenticated HIBP APIs.
+  parameters:
+    UserAgent:
+      name: user-agent
+      in: header
+      required: true
+      description: User agent string identifying the consuming application. Required on all documented requests, including unauthenticated endpoints; missing user agents may receive HTTP 403 responses.
+      schema:
+        type: string
