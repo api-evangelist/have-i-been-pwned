@@ -196,6 +196,15 @@ components:
       - AddedDate
       - ModifiedDate
       - PwnCount
+    BreachName:
+      type: object
+      description: Truncated breach representation returned by default from /breachedaccount.
+      properties:
+        Name:
+          type: string
+          description: Pascal-cased stable name of the breach.
+      required:
+      - Name
     BreachedAccountRangeEntry:
       type: object
       description: A k-anonymity breached-account match.
@@ -211,15 +220,6 @@ components:
       required:
       - hashSuffix
       - websites
-    BreachName:
-      type: object
-      description: Truncated breach representation returned by default from /breachedaccount.
-      properties:
-        Name:
-          type: string
-          description: Pascal-cased stable name of the breach.
-      required:
-      - Name
   responses:
     Forbidden:
       description: 'The request is forbidden. Common causes include a missing `user-agent` header,
@@ -231,14 +231,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    NotFound:
+      description: No record matched the supplied identifier.
     Unauthorized:
       description: The `hibp-api-key` header is missing or invalid.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: No record matched the supplied identifier.
     BadRequest:
       description: The request was malformed (e.g. invalid email format).
       content:

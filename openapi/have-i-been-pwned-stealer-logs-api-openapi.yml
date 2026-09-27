@@ -111,21 +111,7 @@ paths:
         '403':
           $ref: '#/components/responses/Forbidden'
 components:
-  schemas:
-    Error:
-      type: object
-      description: Standard HIBP error payload.
-      properties:
-        statusCode:
-          type: integer
-        message:
-          type: string
-      required:
-      - statusCode
-      - message
   responses:
-    NotFound:
-      description: No record matched the supplied identifier.
     Forbidden:
       description: 'The request is forbidden. Common causes include a missing `user-agent` header,
 
@@ -142,6 +128,20 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    NotFound:
+      description: No record matched the supplied identifier.
+  schemas:
+    Error:
+      type: object
+      description: Standard HIBP error payload.
+      properties:
+        statusCode:
+          type: integer
+        message:
+          type: string
+      required:
+      - statusCode
+      - message
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

@@ -90,17 +90,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        statusCode:
-          type: integer
-        message:
-          type: string
-      required:
-      - statusCode
-      - message
-      description: Standard error response returned by most authenticated HIBP APIs.
     Paste:
       type: object
       properties:
@@ -128,6 +117,17 @@ components:
       - Source
       - Id
       - EmailCount
+    Error:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+        message:
+          type: string
+      required:
+      - statusCode
+      - message
+      description: Standard error response returned by most authenticated HIBP APIs.
   parameters:
     UserAgent:
       name: user-agent

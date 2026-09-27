@@ -210,14 +210,33 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    DomainVerificationDnsTokenResponse:
+    Error:
       type: object
       properties:
-        txtRecordValue:
+        statusCode:
+          type: integer
+        message:
           type: string
-          description: TXT record value to publish on the domain before calling verifydnstoken.
       required:
-      - txtRecordValue
+      - statusCode
+      - message
+      description: Standard error response returned by most authenticated HIBP APIs.
+    MessageOnlyError:
+      type: object
+      description: Simple error response used by the domain-verification APIs.
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    DomainVerificationRequest:
+      type: object
+      properties:
+        DomainName:
+          type: string
+          description: Domain name to generate or verify a domain-verification token for.
+      required:
+      - DomainName
     DomainVerificationEmailRequest:
       type: object
       properties:
@@ -230,33 +249,14 @@ components:
       required:
       - DomainName
       - EmailAlias
-    Error:
+    DomainVerificationDnsTokenResponse:
       type: object
       properties:
-        statusCode:
-          type: integer
-        message:
+        txtRecordValue:
           type: string
+          description: TXT record value to publish on the domain before calling verifydnstoken.
       required:
-      - statusCode
-      - message
-      description: Standard error response returned by most authenticated HIBP APIs.
-    DomainVerificationRequest:
-      type: object
-      properties:
-        DomainName:
-          type: string
-          description: Domain name to generate or verify a domain-verification token for.
-      required:
-      - DomainName
-    MessageOnlyError:
-      type: object
-      description: Simple error response used by the domain-verification APIs.
-      properties:
-        message:
-          type: string
-      required:
-      - message
+      - txtRecordValue
   parameters:
     UserAgent:
       name: user-agent

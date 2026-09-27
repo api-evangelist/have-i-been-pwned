@@ -102,14 +102,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    NotFound:
+      description: No record matched the supplied identifier.
     Unauthorized:
       description: The `hibp-api-key` header is missing or invalid.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: No record matched the supplied identifier.
     TooManyRequests:
       description: 'Rate limit exceeded. Inspect the `retry-after` header to determine when to retry.
 

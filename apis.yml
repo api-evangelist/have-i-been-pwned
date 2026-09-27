@@ -238,9 +238,10 @@ apis:
   humanURL: https://haveibeenpwned.com/API/v3
   baseURL: https://haveibeenpwned.com/api/v3
   tags:
-  - DataClasses
+  - Data Classes
   tags_raw:
   - Data Classes
+  - DataClasses
   properties:
   - type: OpenAPI
     url: openapi/have-i-been-pwned-data-classes-api-openapi.yml

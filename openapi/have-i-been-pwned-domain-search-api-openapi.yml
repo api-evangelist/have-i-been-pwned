@@ -129,37 +129,6 @@ paths:
           description: Verification email sent.
 components:
   schemas:
-    DomainEmailVerificationRequest:
-      type: object
-      properties:
-        DomainName:
-          type: string
-          description: Fully qualified domain to verify.
-        EmailAlias:
-          type: string
-          description: Local part of the email alias (admin, hostmaster, info, security, webmaster).
-      required:
-      - DomainName
-      - EmailAlias
-    DomainVerificationRequest:
-      type: object
-      properties:
-        DomainName:
-          type: string
-          description: Fully qualified domain to verify.
-      required:
-      - DomainName
-    Error:
-      type: object
-      description: Standard HIBP error payload.
-      properties:
-        statusCode:
-          type: integer
-        message:
-          type: string
-      required:
-      - statusCode
-      - message
     SubscribedDomain:
       type: object
       description: A domain monitored by the calling subscription.
@@ -190,6 +159,37 @@ components:
           description: Next renewal date for the domain subscription.
       required:
       - DomainName
+    Error:
+      type: object
+      description: Standard HIBP error payload.
+      properties:
+        statusCode:
+          type: integer
+        message:
+          type: string
+      required:
+      - statusCode
+      - message
+    DomainVerificationRequest:
+      type: object
+      properties:
+        DomainName:
+          type: string
+          description: Fully qualified domain to verify.
+      required:
+      - DomainName
+    DomainEmailVerificationRequest:
+      type: object
+      properties:
+        DomainName:
+          type: string
+          description: Fully qualified domain to verify.
+        EmailAlias:
+          type: string
+          description: Local part of the email alias (admin, hostmaster, info, security, webmaster).
+      required:
+      - DomainName
+      - EmailAlias
   responses:
     Forbidden:
       description: 'The request is forbidden. Common causes include a missing `user-agent` header,
@@ -201,14 +201,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    NotFound:
+      description: No record matched the supplied identifier.
     Unauthorized:
       description: The `hibp-api-key` header is missing or invalid.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: No record matched the supplied identifier.
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
