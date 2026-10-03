@@ -230,17 +230,14 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Error:
+    TruncatedBreach:
       type: object
       properties:
-        statusCode:
-          type: integer
-        message:
+        Name:
           type: string
+          description: The stable Pascal-cased breach name. This is the value returned by default from /breachedaccount and can be used to look up the full breach model via /breach/{name}.
       required:
-      - statusCode
-      - message
-      description: Standard error response returned by most authenticated HIBP APIs.
+      - Name
     Breach:
       type: object
       properties:
@@ -328,14 +325,17 @@ components:
       - IsSubscriptionFree
       - IsStealerLog
       - LogoPath
-    TruncatedBreach:
+    Error:
       type: object
       properties:
-        Name:
+        statusCode:
+          type: integer
+        message:
           type: string
-          description: The stable Pascal-cased breach name. This is the value returned by default from /breachedaccount and can be used to look up the full breach model via /breach/{name}.
       required:
-      - Name
+      - statusCode
+      - message
+      description: Standard error response returned by most authenticated HIBP APIs.
     BreachedAccountRangeResult:
       type: object
       properties:

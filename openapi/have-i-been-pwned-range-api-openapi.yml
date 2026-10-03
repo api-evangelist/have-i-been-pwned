@@ -68,13 +68,6 @@ paths:
       x-operation-id-source: derived
 components:
   parameters:
-    AddPadding:
-      name: Add-Padding
-      in: header
-      required: false
-      description: Adds random padding to Pwned Passwords responses (discard padded entries with count of 0).
-      schema:
-        type: boolean
     UserAgent:
       name: user-agent
       in: header
@@ -82,6 +75,13 @@ components:
       description: User agent string identifying the consuming application. Required on all documented requests, including unauthenticated endpoints; missing user agents may receive HTTP 403 responses.
       schema:
         type: string
+    AddPadding:
+      name: Add-Padding
+      in: header
+      required: false
+      description: Adds random padding to Pwned Passwords responses (discard padded entries with count of 0).
+      schema:
+        type: boolean
   securitySchemes:
     HibpApiKey:
       type: apiKey
