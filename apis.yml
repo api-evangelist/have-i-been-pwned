@@ -286,6 +286,9 @@ apis:
   - type: OpenAPI
     url: openapi/have-i-been-pwned-stealer-logs-api-openapi.yml
 common:
+- type: CapabilityMap
+  url: capabilities/have-i-been-pwned-capability-edges.yml
+  name: Have I Been Pwned Business Capability Map
 - type: AgenticAccess
   url: agentic-access/have-i-been-pwned-agentic-access.yml
 - type: VulnerabilityDisclosure

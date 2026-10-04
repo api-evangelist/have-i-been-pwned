@@ -1,0 +1,101 @@
+slug: have-i-been-pwned
+provider: Have I Been Pwned
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 9
+edges:
+- tag: Domain Search
+  spec_file: have-i-been-pwned-domain-search-api-openapi.yml
+  capability_id: BC-620
+  capability_id_l1: BC-620
+  capability_name: Cybersecurity Management
+  confidence: 0.75
+  evidence: GET /breacheddomain/{domain} getBreachedDomain Get Breached Email Addresses For A Domain
+  reason: 'The primary operation returns which email addresses on an organisation''s domain appear in
+    known data breaches — credential-exposure monitoring, a cybersecurity function. Supporting ops are
+    domain-ownership verification plumbing. L2 left null: it sits between threat detection and vulnerability/exposure
+    management rather than cleanly in either.'
+- tag: Range Search
+  spec_file: have-i-been-pwned-range-search-api-openapi.yml
+  capability_id: BC-620
+  capability_id_l1: BC-620
+  capability_name: Cybersecurity Management
+  confidence: 0.75
+  evidence: Clients submit the first five characters of the SHA-1 (or NTLM) hash of a password and receive
+    a list of matching hash suffixes with their breach counts
+  reason: Compromised-password checking service used to block known-breached credentials — a cybersecurity
+    control. No single L2 cleanly fits, so L1 only.
+- tag: Stealer Logs
+  spec_file: have-i-been-pwned-stealer-logs-api-openapi.yml
+  capability_id: BC-620
+  capability_id_l1: BC-620
+  capability_name: Cybersecurity Management
+  confidence: 0.75
+  evidence: GET /stealerlogsbyemail/{email} Get Stealer Log Domains For An Email
+  reason: Queries infostealer-malware log corpora for exposed credentials tied to emails and domains —
+    threat/exposure intelligence for security teams.
+- tag: Pasteaccount
+  spec_file: have-i-been-pwned-pasteaccount-api-openapi.yml
+  capability_id: BC-620
+  capability_id_l1: BC-620
+  capability_name: Cybersecurity Management
+  confidence: 0.7
+  evidence: GET /pasteaccount/{account} Get all pastes for an account
+  reason: Checks whether an account's credentials have been exposed in public pastes — credential-exposure
+    detection, a cybersecurity monitoring function rather than any commercial capability.
+- tag: Pastes
+  spec_file: have-i-been-pwned-pastes-api-openapi.yml
+  capability_id: BC-620
+  capability_id_l1: BC-620
+  capability_name: Cybersecurity Management
+  confidence: 0.7
+  evidence: GET /pasteaccount/{account} getPastesForAccount Get Pastes For An Account
+  reason: 'Same surface as Pasteaccount: lookup of an account in publicly pasted credential dumps, i.e.
+    security exposure monitoring.'
+- tag: Range
+  spec_file: have-i-been-pwned-range-api-openapi.yml
+  capability_id: BC-620
+  capability_id_l1: BC-620
+  capability_name: Cybersecurity Management
+  confidence: 0.7
+  evidence: GET /range/{prefix} getRangeByPrefix Pwned Passwords range search (k-Anonymity)
+  reason: k-anonymity lookup of whether a password hash appears in breached credential corpora — used
+    to enforce credential hygiene. Cybersecurity capability; L2 ambiguous between identity/access and
+    vulnerability management.
+- tag: Stealerlogsbyemail
+  spec_file: have-i-been-pwned-stealerlogsbyemail-api-openapi.yml
+  capability_id: BC-620
+  capability_id_l1: BC-620
+  capability_name: Cybersecurity Management
+  confidence: 0.7
+  evidence: GET /stealerlogsbyemail/{email} Get all stealer log domains for an email address
+  reason: Single lookup of malware stealer-log exposure for an email address — credential compromise detection,
+    a cybersecurity function.
+- tag: Stealerlogsbyemaildomain
+  spec_file: have-i-been-pwned-stealerlogsbyemaildomain-api-openapi.yml
+  capability_id: BC-620
+  capability_id_l1: BC-620
+  capability_name: Cybersecurity Management
+  confidence: 0.7
+  evidence: GET /stealerlogsbyemaildomain/{domain} Get all stealer log email aliases for an email domain
+  reason: Enumerates compromised aliases on an owned email domain from infostealer logs — organisational
+    credential-exposure monitoring.
+- tag: Stealerlogsbywebsitedomain
+  spec_file: have-i-been-pwned-stealerlogsbywebsitedomain-api-openapi.yml
+  capability_id: BC-620
+  capability_id_l1: BC-620
+  capability_name: Cybersecurity Management
+  confidence: 0.7
+  evidence: GET /stealerlogsbywebsitedomain/{domain} Get all stealer log email addresses for a website
+    domain
+  reason: Returns accounts captured by infostealer malware against a given website domain — compromised-credential
+    intelligence for security response.
