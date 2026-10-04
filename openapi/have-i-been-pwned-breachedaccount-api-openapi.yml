@@ -230,14 +230,31 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    TruncatedBreach:
+    BreachedAccountRangeResult:
       type: object
       properties:
-        Name:
+        hashSuffix:
           type: string
-          description: The stable Pascal-cased breach name. This is the value returned by default from /breachedaccount and can be used to look up the full breach model via /breach/{name}.
+          description: The remaining 34 hexadecimal characters of the breached account's SHA-1 hash.
+        websites:
+          type: array
+          items:
+            type: string
+          description: The breach names associated with the hashed account suffix after public API filtering. Sensitive breaches are never returned.
       required:
-      - Name
+      - hashSuffix
+      - websites
+    Error:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+        message:
+          type: string
+      required:
+      - statusCode
+      - message
+      description: Standard error response returned by most authenticated HIBP APIs.
     Breach:
       type: object
       properties:
@@ -325,31 +342,14 @@ components:
       - IsSubscriptionFree
       - IsStealerLog
       - LogoPath
-    Error:
+    TruncatedBreach:
       type: object
       properties:
-        statusCode:
-          type: integer
-        message:
+        Name:
           type: string
+          description: The stable Pascal-cased breach name. This is the value returned by default from /breachedaccount and can be used to look up the full breach model via /breach/{name}.
       required:
-      - statusCode
-      - message
-      description: Standard error response returned by most authenticated HIBP APIs.
-    BreachedAccountRangeResult:
-      type: object
-      properties:
-        hashSuffix:
-          type: string
-          description: The remaining 34 hexadecimal characters of the breached account's SHA-1 hash.
-        websites:
-          type: array
-          items:
-            type: string
-          description: The breach names associated with the hashed account suffix after public API filtering. Sensitive breaches are never returned.
-      required:
-      - hashSuffix
-      - websites
+      - Name
   parameters:
     UserAgent:
       name: user-agent

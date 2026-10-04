@@ -51,47 +51,6 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 components:
-  responses:
-    TooManyRequests:
-      description: 'Rate limit exceeded. Inspect the `retry-after` header to determine when to retry.
-
-        '
-      headers:
-        retry-after:
-          schema:
-            type: integer
-          description: Seconds to wait before retrying.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: The `hibp-api-key` header is missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: No record matched the supplied identifier.
-    Forbidden:
-      description: 'The request is forbidden. Common causes include a missing `user-agent` header,
-
-        querying an unverified domain, or a feature not included in the calling subscription.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-  parameters:
-    AccountPath:
-      name: account
-      in: path
-      required: true
-      description: URL-encoded email address to search.
-      schema:
-        type: string
-        format: email
   schemas:
     Error:
       type: object
@@ -132,6 +91,47 @@ components:
       - Source
       - Id
       - EmailCount
+  parameters:
+    AccountPath:
+      name: account
+      in: path
+      required: true
+      description: URL-encoded email address to search.
+      schema:
+        type: string
+        format: email
+  responses:
+    Unauthorized:
+      description: The `hibp-api-key` header is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: 'Rate limit exceeded. Inspect the `retry-after` header to determine when to retry.
+
+        '
+      headers:
+        retry-after:
+          schema:
+            type: integer
+          description: Seconds to wait before retrying.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: 'The request is forbidden. Common causes include a missing `user-agent` header,
+
+        querying an unverified domain, or a feature not included in the calling subscription.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: No record matched the supplied identifier.
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

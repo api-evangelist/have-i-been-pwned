@@ -109,54 +109,18 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 components:
-  responses:
-    TooManyRequests:
-      description: 'Rate limit exceeded. Inspect the `retry-after` header to determine when to retry.
-
-        '
-      headers:
-        retry-after:
-          schema:
-            type: integer
-          description: Seconds to wait before retrying.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: The `hibp-api-key` header is missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: No record matched the supplied identifier.
-    Forbidden:
-      description: 'The request is forbidden. Common causes include a missing `user-agent` header,
-
-        querying an unverified domain, or a feature not included in the calling subscription.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: The request was malformed (e.g. invalid email format).
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    BreachName:
+    Error:
       type: object
-      description: Truncated breach representation returned by default from /breachedaccount.
+      description: Standard HIBP error payload.
       properties:
-        Name:
+        statusCode:
+          type: integer
+        message:
           type: string
-          description: Pascal-cased stable name of the breach.
       required:
-      - Name
+      - statusCode
+      - message
     Breach:
       type: object
       description: Full metadata record describing a breach in HIBP.
@@ -232,17 +196,15 @@ components:
       - AddedDate
       - ModifiedDate
       - PwnCount
-    Error:
+    BreachName:
       type: object
-      description: Standard HIBP error payload.
+      description: Truncated breach representation returned by default from /breachedaccount.
       properties:
-        statusCode:
-          type: integer
-        message:
+        Name:
           type: string
+          description: Pascal-cased stable name of the breach.
       required:
-      - statusCode
-      - message
+      - Name
     BreachedAccountRangeEntry:
       type: object
       description: A k-anonymity breached-account match.
@@ -267,6 +229,44 @@ components:
       schema:
         type: string
         format: email
+  responses:
+    Unauthorized:
+      description: The `hibp-api-key` header is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: 'Rate limit exceeded. Inspect the `retry-after` header to determine when to retry.
+
+        '
+      headers:
+        retry-after:
+          schema:
+            type: integer
+          description: Seconds to wait before retrying.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: The request was malformed (e.g. invalid email format).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: 'The request is forbidden. Common causes include a missing `user-agent` header,
+
+        querying an unverified domain, or a feature not included in the calling subscription.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: No record matched the supplied identifier.
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

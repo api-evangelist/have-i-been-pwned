@@ -128,26 +128,18 @@ paths:
         '200':
           description: Verification email sent.
 components:
-  responses:
-    Unauthorized:
-      description: The `hibp-api-key` header is missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: 'The request is forbidden. Common causes include a missing `user-agent` header,
-
-        querying an unverified domain, or a feature not included in the calling subscription.
-
-        '
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: No record matched the supplied identifier.
   schemas:
+    Error:
+      type: object
+      description: Standard HIBP error payload.
+      properties:
+        statusCode:
+          type: integer
+        message:
+          type: string
+      required:
+      - statusCode
+      - message
     DomainEmailVerificationRequest:
       type: object
       properties:
@@ -160,17 +152,14 @@ components:
       required:
       - DomainName
       - EmailAlias
-    Error:
+    DomainVerificationRequest:
       type: object
-      description: Standard HIBP error payload.
       properties:
-        statusCode:
-          type: integer
-        message:
+        DomainName:
           type: string
+          description: Fully qualified domain to verify.
       required:
-      - statusCode
-      - message
+      - DomainName
     SubscribedDomain:
       type: object
       description: A domain monitored by the calling subscription.
@@ -201,14 +190,25 @@ components:
           description: Next renewal date for the domain subscription.
       required:
       - DomainName
-    DomainVerificationRequest:
-      type: object
-      properties:
-        DomainName:
-          type: string
-          description: Fully qualified domain to verify.
-      required:
-      - DomainName
+  responses:
+    Unauthorized:
+      description: The `hibp-api-key` header is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: 'The request is forbidden. Common causes include a missing `user-agent` header,
+
+        querying an unverified domain, or a feature not included in the calling subscription.
+
+        '
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: No record matched the supplied identifier.
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
