@@ -14,7 +14,7 @@ edges:
     registered_name: io.github.troyhunt/hibp
     register_id: io.github.troyhunt/hibp
     detected_by: sweep-agent-tools.py
-    detected: '2026-10-14'
+    detected: '2026-10-15'
   mcp_registry:
     servers:
     - io.github.troyhunt/hibp
