@@ -210,6 +210,14 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    DomainVerificationRequest:
+      type: object
+      properties:
+        DomainName:
+          type: string
+          description: Domain name to generate or verify a domain-verification token for.
+      required:
+      - DomainName
     Error:
       type: object
       properties:
@@ -221,26 +229,6 @@ components:
       - statusCode
       - message
       description: Standard error response returned by most authenticated HIBP APIs.
-    DomainVerificationEmailRequest:
-      type: object
-      properties:
-        DomainName:
-          type: string
-          description: Domain name to send the verification email for.
-        EmailAlias:
-          type: string
-          description: One of the configured domain-verification aliases (for example admin or postmaster).
-      required:
-      - DomainName
-      - EmailAlias
-    DomainVerificationRequest:
-      type: object
-      properties:
-        DomainName:
-          type: string
-          description: Domain name to generate or verify a domain-verification token for.
-      required:
-      - DomainName
     DomainVerificationDnsTokenResponse:
       type: object
       properties:
@@ -257,6 +245,18 @@ components:
           type: string
       required:
       - message
+    DomainVerificationEmailRequest:
+      type: object
+      properties:
+        DomainName:
+          type: string
+          description: Domain name to send the verification email for.
+        EmailAlias:
+          type: string
+          description: One of the configured domain-verification aliases (for example admin or postmaster).
+      required:
+      - DomainName
+      - EmailAlias
   parameters:
     UserAgent:
       name: user-agent

@@ -129,29 +129,6 @@ paths:
           description: Verification email sent.
 components:
   schemas:
-    Error:
-      type: object
-      description: Standard HIBP error payload.
-      properties:
-        statusCode:
-          type: integer
-        message:
-          type: string
-      required:
-      - statusCode
-      - message
-    DomainEmailVerificationRequest:
-      type: object
-      properties:
-        DomainName:
-          type: string
-          description: Fully qualified domain to verify.
-        EmailAlias:
-          type: string
-          description: Local part of the email alias (admin, hostmaster, info, security, webmaster).
-      required:
-      - DomainName
-      - EmailAlias
     DomainVerificationRequest:
       type: object
       properties:
@@ -190,13 +167,30 @@ components:
           description: Next renewal date for the domain subscription.
       required:
       - DomainName
+    DomainEmailVerificationRequest:
+      type: object
+      properties:
+        DomainName:
+          type: string
+          description: Fully qualified domain to verify.
+        EmailAlias:
+          type: string
+          description: Local part of the email alias (admin, hostmaster, info, security, webmaster).
+      required:
+      - DomainName
+      - EmailAlias
+    Error:
+      type: object
+      description: Standard HIBP error payload.
+      properties:
+        statusCode:
+          type: integer
+        message:
+          type: string
+      required:
+      - statusCode
+      - message
   responses:
-    Unauthorized:
-      description: The `hibp-api-key` header is missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     Forbidden:
       description: 'The request is forbidden. Common causes include a missing `user-agent` header,
 
@@ -209,6 +203,12 @@ components:
             $ref: '#/components/schemas/Error'
     NotFound:
       description: No record matched the supplied identifier.
+    Unauthorized:
+      description: The `hibp-api-key` header is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

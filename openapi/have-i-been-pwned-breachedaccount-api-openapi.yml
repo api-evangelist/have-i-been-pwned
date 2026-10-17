@@ -229,32 +229,23 @@ paths:
       operationId: getBreachedaccountRangeByPrefix
       x-operation-id-source: derived
 components:
+  parameters:
+    UserAgent:
+      name: user-agent
+      in: header
+      required: true
+      description: User agent string identifying the consuming application. Required on all documented requests, including unauthenticated endpoints; missing user agents may receive HTTP 403 responses.
+      schema:
+        type: string
   schemas:
-    BreachedAccountRangeResult:
+    TruncatedBreach:
       type: object
       properties:
-        hashSuffix:
+        Name:
           type: string
-          description: The remaining 34 hexadecimal characters of the breached account's SHA-1 hash.
-        websites:
-          type: array
-          items:
-            type: string
-          description: The breach names associated with the hashed account suffix after public API filtering. Sensitive breaches are never returned.
+          description: The stable Pascal-cased breach name. This is the value returned by default from /breachedaccount and can be used to look up the full breach model via /breach/{name}.
       required:
-      - hashSuffix
-      - websites
-    Error:
-      type: object
-      properties:
-        statusCode:
-          type: integer
-        message:
-          type: string
-      required:
-      - statusCode
-      - message
-      description: Standard error response returned by most authenticated HIBP APIs.
+      - Name
     Breach:
       type: object
       properties:
@@ -342,22 +333,31 @@ components:
       - IsSubscriptionFree
       - IsStealerLog
       - LogoPath
-    TruncatedBreach:
+    Error:
       type: object
       properties:
-        Name:
+        statusCode:
+          type: integer
+        message:
           type: string
-          description: The stable Pascal-cased breach name. This is the value returned by default from /breachedaccount and can be used to look up the full breach model via /breach/{name}.
       required:
-      - Name
-  parameters:
-    UserAgent:
-      name: user-agent
-      in: header
-      required: true
-      description: User agent string identifying the consuming application. Required on all documented requests, including unauthenticated endpoints; missing user agents may receive HTTP 403 responses.
-      schema:
-        type: string
+      - statusCode
+      - message
+      description: Standard error response returned by most authenticated HIBP APIs.
+    BreachedAccountRangeResult:
+      type: object
+      properties:
+        hashSuffix:
+          type: string
+          description: The remaining 34 hexadecimal characters of the breached account's SHA-1 hash.
+        websites:
+          type: array
+          items:
+            type: string
+          description: The breach names associated with the hashed account suffix after public API filtering. Sensitive breaches are never returned.
+      required:
+      - hashSuffix
+      - websites
   securitySchemes:
     HibpApiKey:
       type: apiKey

@@ -95,17 +95,6 @@ paths:
       description: HIBP Production API
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        statusCode:
-          type: integer
-        message:
-          type: string
-      required:
-      - statusCode
-      - message
-      description: Standard error response returned by most authenticated HIBP APIs.
     Breach:
       type: object
       properties:
@@ -193,6 +182,17 @@ components:
       - IsSubscriptionFree
       - IsStealerLog
       - LogoPath
+    Error:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+        message:
+          type: string
+      required:
+      - statusCode
+      - message
+      description: Standard error response returned by most authenticated HIBP APIs.
     Breach_2:
       type: object
       description: Full metadata record describing a breach in HIBP.

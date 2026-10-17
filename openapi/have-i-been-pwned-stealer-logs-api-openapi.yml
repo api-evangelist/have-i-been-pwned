@@ -112,6 +112,8 @@ paths:
           $ref: '#/components/responses/Forbidden'
 components:
   responses:
+    NotFound:
+      description: No record matched the supplied identifier.
     Forbidden:
       description: 'The request is forbidden. Common causes include a missing `user-agent` header,
 
@@ -122,8 +124,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: No record matched the supplied identifier.
     Unauthorized:
       description: The `hibp-api-key` header is missing or invalid.
       content:
