@@ -300,3 +300,9 @@ externalDocs:
 x-refined-from:
 - have-i-been-pwned-openapi.json
 - hibp-openapi.yml
+x-provenance:
+  method: harvested
+  publisher: Have I Been Pwned
+  source: https://haveibeenpwned.com/openapi.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
